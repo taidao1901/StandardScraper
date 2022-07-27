@@ -42,7 +42,7 @@ def Get_product_url(content,rootlink='', parent_tag='', child_tag=''):
     # Convert content in page to beutifulsoup type
     soup = BeautifulSoup(content, 'html.parser')
 
-    # find parent block that a tag in it
+    # find parent block that contain <a> tag
     product_list = soup.find_all('div', class_= parent_tag)
     productlinks=[]
     for product in product_list:
@@ -124,6 +124,7 @@ def get_product_urls(links, rootlink='', parent_tag='', child_tag='',webtype='no
 
 
 if __name__ == '__main__':
+
     links=['https://hades.vn/collections/all?page={number}']
     rootlink='https://hades.vn'
     parent_tag='product-img'

@@ -31,7 +31,6 @@ def get_html_source(productlinks,isdynamic):
     
 
 
-# In[ ]:
 
 
 # Sử dụng hàm này lấy giá sản phẩm hoặc các thông tin khác được bọc trong class webwoocommerce
@@ -44,7 +43,6 @@ def get_webwoocommerce_value(productlinks):
     return price
 
 
-# In[18]:
 
 
 # Dùng hàm này để lấy thông tin sản phẩm
@@ -87,7 +85,7 @@ def get_product_info(html_soure,productlinks):
         
 
 
-# In[52]:
+
 
 
 # Nhập thông tin chung của shop ở đây .
@@ -100,14 +98,12 @@ now=now = datetime.now()
 scrap_day = now.strftime("%m/%d/%Y %H:%M:%S")
 
 
-# In[53]:
-
 
 tt=[shop_name,stylebox_shop_id,shop_url,scrap_date]
 
-def get_data(productlinks,isdynamic,tt=tt):
-    html_soure=get_html_source(productlinks,isdynamic)
-    data =get_product_info(html_soure,productlinks)
+def get_data(productlink,isdynamic,tt=tt):
+    html_soure=get_html_source(productlink,isdynamic)
+    data =get_product_info(html_soure,productlink)
     
     data.reverse()
     for i in tt:
@@ -115,8 +111,24 @@ def get_data(productlinks,isdynamic,tt=tt):
     data.reverse()
     return data
 
+def web_scraping(productlinks):
+    data=[]
+    data.append(['shop_name', 'stylebox_shop_id', 'shop_url', 'scrap_date', 'product_name', 'product_link','curent_price','sale_price','size','colors','description','comments', 'pic1'])
+    k=2
+    print('Số sản phẩm khai thác được: ',len(productlinks))
+    print('------------------------------------------------')
+    print('Link các sản phẩm đã khai thác xong : ')
+    c=1
+    for i in productlinks:
+        print(c,' : ',i)
+        c+=1
+        m=get_data(i)
+        while len(data[0])<len(m):
+            data[0].append('pic'+str(k))
+            k+=1
+        data.append(m)
+    return data
 
-# In[ ]:
 
 
 
