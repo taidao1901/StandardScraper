@@ -33,7 +33,8 @@ conda create --name <env_name> --file requirements.txt
       
   ```
   4. Xác định tên các class cần thiết.
-    * Ví dụ: 
+   *Ví dụ: \
+    ![Ví dụ khối div chứa link](https://i.imgur.com/hb7db1Q.png)
     ```
     
     ```
