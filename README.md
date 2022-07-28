@@ -53,23 +53,23 @@ conda create --name <env_name> --file requirements.txt
   2. Các cú pháp thường dùng khi sửa file  :
     
     
-    ```
+    
     **Lấy các thẻ**
     - Lấy một thẻ :
       > Tên_biến = soup.find('Tên_thẻ', class_="Tên_class")
     - Lấy nhiều thẻ :
       > Tên_biến = soup.find_all('Tên_thẻ', class_="Tên_class")
-    ```
+    
  
    
-    ```
+    
      ** Lấy thuộc tính của thẻ**
     - Lấy một thuộc tính nào đó ( cái này tùy trường hợp có thể lấy được hoặc không)
     - Lấy từng phần tử trong một biến chứa danh sách thẻ :
       for i in Tên_biến :
           Câu lệnh muốn dùng để sử lý các thẻ có trong danh sách thẻ.
     - Lấy một thẻ trong nhiều thẻ
-    ```
+   
    
   3. Các chỗ cần sửa
     
