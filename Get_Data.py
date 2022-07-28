@@ -1,4 +1,5 @@
 
+# In[1]:
 
 
 from datetime import datetime
@@ -19,13 +20,13 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 
 
-
-# In[5]:
-
+# In[2]:
 
 
 
-# In[6]:
+
+
+# In[3]:
 
 
 # Hàm này để lấy file html của trang web sản phẩm
@@ -44,7 +45,7 @@ def get_html_source(productlinks,isdynamic):
     
 
 
-# In[7]:
+# In[4]:
 
 
 # Sử dụng hàm này lấy giá sản phẩm hoặc các thông tin khác được bọc trong class webwoocommerce
@@ -57,7 +58,7 @@ def get_webwoocommerce_value(productlinks):
     return price
 
 
-# In[8]:
+# In[5]:
 
 
 # Dùng hàm này để lấy thông tin sản phẩm
@@ -69,7 +70,7 @@ def get_product_info(html_soure,productlink):
     # Lấy tên sản phẩm, SỬA CODE Ở ĐÂY
     h1 = soup.find('h1',class_="product-title")
     name = h1.find('span').text.strip()
-    print(name)
+    #print(name)
     kq.append(name)
     
     # Thêm vào link sản phẩm, KHÔNG SỬA CHỖ NÀY
@@ -77,7 +78,7 @@ def get_product_info(html_soure,productlink):
 
         
     # Lấy giá gốc, SỬA CODE Ở ĐÂY
-    price = soup.find('span',class_="total-money").text.strip()
+    price = soup.find('span',class_="price").text.strip()
     kq.append(price)
     
     
@@ -147,7 +148,7 @@ def get_product_info(html_soure,productlink):
         
 
 
-# In[9]:
+# In[6]:
 
 
 # Nhập thông tin chung của shop ở đây .
@@ -160,9 +161,10 @@ shop_url ='https://emwear.vn'
 now= datetime.now()
 scrap_day = now.strftime("%m/%d/%Y %H:%M:%S")
 tt=[shop_name,stylebox_shop_id,shop_url,scrap_day]
+tt.reverse()
 
 
-# In[10]:
+# In[7]:
 
 
 # Không chỉnh sửa chỗ này
@@ -176,12 +178,12 @@ def get_data(productlink,isdynamic,tt=tt):
     return data
 
 
-# In[11]:
+# In[8]:
 
 
 
 
-# In[13]:
+# In[9]:
 
 
 # Không chỉnh sửa chỗ này.
@@ -197,9 +199,28 @@ def web_scraping(productlinks,isdynamic,tt=tt):
         print(c,' : ',i)
         c+=1
         m=get_data(i,isdynamic,tt=tt)
+        print(m)
         while len(data[0])<len(m):
             data[0].append('pic'+str(k))
             k+=1
         data.append(m)
     return data
+
+
+# In[10]:
+
+
+
+
+
+# In[11]:
+
+
+
+
+
+# In[ ]:
+
+
+
 
