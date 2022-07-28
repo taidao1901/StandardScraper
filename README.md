@@ -33,10 +33,19 @@ conda create --name <env_name> --file requirements.txt
       
   ```
   4. Xác định tên các class cần thiết.
-   *Ví dụ: \
-    ![Ví dụ khối div chứa link](https://i.imgur.com/hb7db1Q.png)
-    ```
-    
-    ```
+   - Ví dụ:\
+   ![Ví dụ khối div chứa link](https://i.imgur.com/hb7db1Q.png)\
+   ```
+      # Tryền tên class của thẻ div chứa thẻ <a>
+      parent_tag = 'item'
+      # Truyền tên class của thẻ <a> bên trong.(Trong trường hợp này không có nên bỏ trống)
+      child_tag=''
+   ```
+   5.Lưu ý:
+   - Để kiểm tra xem việc lấy link các có ổn định hay không chạy lệnh.
+   ```
+    python main.py debug_links
+   ```
+### Lấy thông tin sản phẩm. 
     
     
