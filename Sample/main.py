@@ -4,6 +4,7 @@ import csv
 import json
 import sys
 from datetime import datetime
+import traceback
 def export_csv(file, kq):
     with open(file , 'w', encoding='utf-8') as f:
         writer = csv.writer(f)
@@ -60,15 +61,15 @@ if __name__ == '__main__':
         product_links= get_product_urls(links, rootlink=rootlink, parent_tag=parent_tag, child_tag=child_tag,webtype=webtype,dynamic=dynamic)
         try:
             if sys.argv[1]=="debug_links":
+                print('Tổng số sản phẩm là:', len(product_links))
                 print('5 link sản phẩm đầu tiên là: ')
                 for i in range(5):
                     print(product_links[i])
-            else:
-                pass
         except:
             pass
-    except:
-        print('Lỗi lấy link các sản phẩm')
+    except Exception:
+        print('Lỗi lấy link sản phẩm')
+        traceback.print_exc()
         exit()
 
     # Get infor products
@@ -82,8 +83,9 @@ if __name__ == '__main__':
                     print(data[i])
         except:
             pass
-    except:
+    except Exception:
         print('Lỗi lấy thông tin sản phẩm')
+        traceback.print_exc()
         exit()
 
     # Export data to csv&json file

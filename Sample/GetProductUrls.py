@@ -5,30 +5,36 @@ from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 from time import sleep
+import traceback
 
 def Dynamic_web(link):
     '''
         Lấy nội dung html của dynamic website
             link: link của website
     '''
-    # Get infor in a dynamic page
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
-    driver.get(link)
-    last_height = driver.execute_script("return document.body.scrollHeight")
-    while True:
-        # Scroll down to bottom
-        driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-        # Wait to load page
-        sleep(5)
-        # Calculate new scroll height and compare with last scroll height
-        new_height = driver.execute_script("return document.body.scrollHeight")
-        if new_height == last_height:
-            break
-        last_height = new_height
-    
-    # Convert to html type
-    sele = driver.execute_script("return document.getElementsByTagName('html')[0].innerHTML")
-    return sele
+    try:
+        # Get infor in a dynamic page
+        driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+        driver.get(link)
+        last_height = driver.execute_script("return document.body.scrollHeight")
+        while True:
+            # Scroll down to bottom
+            driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+            # Wait to load page
+            sleep(5)
+            # Calculate new scroll height and compare with last scroll height
+            new_height = driver.execute_script("return document.body.scrollHeight")
+            if new_height == last_height:
+                break
+            last_height = new_height
+        
+        # Convert to html type
+        sele = driver.execute_script("return document.getElementsByTagName('html')[0].innerHTML")
+        return sele
+    except Exception:
+        print('Lỗi phần dynamic website')
+        traceback.print_exc()
+
 
 def Get_product_url(content,rootlink='', parent_tag='', child_tag=''):
     '''
@@ -38,25 +44,29 @@ def Get_product_url(content,rootlink='', parent_tag='', child_tag=''):
             parent_tag: Class của thẻ div gần nhất
             child-tag: Class của thẻ a chứa link sản phẩm (Không truyền nếu không có tên class)
     '''
+    try:
+        # Convert content in page to beutifulsoup type
+        soup = BeautifulSoup(content, 'html.parser')
 
-    # Convert content in page to beutifulsoup type
-    soup = BeautifulSoup(content, 'html.parser')
+        # find parent block that contain <a> tag
+        product_list = soup.find_all('div', class_= parent_tag)
+        productlinks=[]
+        for product in product_list:
+            # if a tag have class name then find it
+            try:
+                if child_tag =='':
+                    temp = product.find_all('a',href=True)[0]['href']
 
-    # find parent block that contain <a> tag
-    product_list = soup.find_all('div', class_= parent_tag)
-    productlinks=[]
-    for product in product_list:
-        # if a tag have class name then find it
-        try:
-            if child_tag =='':
-                temp = product.find_all('a',href=True)[0]['href']
-
-            else: 
-                temp = product.find_all('a',class_=child_tag,href=True)[0]['href']
-            if '/' in temp:
-                    productlinks.append(rootlink + temp)
-        except:
-            pass
+                else: 
+                    temp = product.find_all('a',class_=child_tag,href=True)[0]['href']
+                if '/' in temp:
+                        productlinks.append(rootlink + temp)
+            except:
+                print('Không lấy được link sản phẩm.')
+                pass
+    except Exception:
+        print('Lỗi phần lấy link sản phẩm')
+        traceback.print_exc()
     # return link of products
     return productlinks
     
