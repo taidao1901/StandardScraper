@@ -20,14 +20,6 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 
 
-# In[2]:
-
-
-
-
-
-# In[3]:
-
 
 # Hàm này để lấy file html của trang web sản phẩm
 def get_html_source(productlinks,isdynamic):
@@ -45,7 +37,6 @@ def get_html_source(productlinks,isdynamic):
     
 
 
-# In[4]:
 
 
 # Sử dụng hàm này lấy giá sản phẩm hoặc các thông tin khác được bọc trong class webwoocommerce
@@ -68,8 +59,7 @@ def get_product_info(html_soure,productlink):
     kq=[]
     
     # Lấy tên sản phẩm, SỬA CODE Ở ĐÂY
-    h1 = soup.find('h1',class_="product-title")
-    name = h1.find('span').text.strip()
+    name = soup.find('h1',class_="title")
     #print(name)
     kq.append(name)
     
@@ -78,7 +68,7 @@ def get_product_info(html_soure,productlink):
 
         
     # Lấy giá gốc, SỬA CODE Ở ĐÂY
-    price = soup.find('span',class_="price").text.strip()
+    price = get_webwoocommerce_value(productlink)
     kq.append(price)
     
     
@@ -94,10 +84,10 @@ def get_product_info(html_soure,productlink):
     try:
         #print(4/0)
         size=[]
-        div = soup.find_all('div',class_="swatch-element")
+        div = soup.find_all('span',class_="variable-item-span")
         
         for i in div:
-            size.append(i['value'])
+            size.append(i.text)
     except:
         size = ''
     kq.append(size)
@@ -129,8 +119,8 @@ def get_product_info(html_soure,productlink):
     
     
     # Lấy link ảnh, SỬA CODE Ở ĐÂY.
-    img = soup.find_all('a', class_="fancybox")
-    link = [i.get('value') for i in img]
+    img = soup.find_all('div', class_="s-img")
+    link = [i.get('data-bg') for i in img]
     #print(len(link))
     #print(link)
     
@@ -164,9 +154,6 @@ tt=[shop_name,stylebox_shop_id,shop_url,scrap_day]
 tt.reverse()
 
 
-# In[7]:
-
-
 # Không chỉnh sửa chỗ này
 def get_data(productlink,isdynamic,tt=tt):
     html_soure=get_html_source(productlink,isdynamic)
@@ -176,15 +163,6 @@ def get_data(productlink,isdynamic,tt=tt):
         data.append(i)
     data.reverse()
     return data
-
-
-# In[8]:
-
-
-
-
-# In[9]:
-
 
 # Không chỉnh sửa chỗ này.
 def web_scraping(productlinks,isdynamic,tt=tt):
@@ -205,22 +183,3 @@ def web_scraping(productlinks,isdynamic,tt=tt):
             k+=1
         data.append(m)
     return data
-
-
-# In[10]:
-
-
-
-
-
-# In[11]:
-
-
-
-
-
-# In[ ]:
-
-
-
-

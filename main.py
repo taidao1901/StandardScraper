@@ -36,20 +36,20 @@ if __name__ == '__main__':
     # Tên file cần xuất
     csvfilename  = 'gemclothing.csv'
     jsonfilename = 'gemclothing.json'
-    # Tham số cho hàm lấy link các sản phẩm
-    links=['https://ananas.vn/product-list/']
+
+    # Tham số cho hàm lấy link các sản phẩm, SỬA THAM SỐ Ở ĐÂY
+    links=['https://gemclothing.vn/san-pham/page/{number}/']
     rootlink=''
-    parent_tag='cont-item'
+    parent_tag='item'
     child_tag = ''
-    webtype = 'scroll'
+    webtype = 'normal'
     dynamic= False
 
 
-    # Tham số cho hàm lấy thông tin sản phẩm
+    # Tham số cho hàm lấy thông tin sản phẩm, SỬA THAM SỐ Ở ĐÂY
     shop_name ='gemclothing'
     stylebox_shop_id ='2'
     shop_url ='https://gemclothing.vn'
-
 
 
     now = datetime.now()
@@ -91,6 +91,3 @@ if __name__ == '__main__':
         export_csv_and_json(csvfilename, jsonfilename, data)
     except:
         print('Lỗi trong quá trình xuất file. Có thể do chưa sửa tên shop.')
-
-    
-        
