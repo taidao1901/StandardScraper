@@ -42,14 +42,14 @@ conda create --name <env_name> --file requirements.txt
   
   1. Quy ước
     
-    ```
+    
     - Tên_biến : các tên dùng để lưu trữ một giá trị như : name để lưu trữ tên, price để lưu trữ giá tiền 
     - Tên_thẻ : tên các thẻ trong html như div, span, h1, img ...
     - Tên_class : tên các class được đặt trong thẻ 
     **Chú ý :** 
     - Khi lấy class ưu tiên chọn những tên có ý nghĩa khi dịch ra tiếng Việt như : product, item ...
     - Tránh lấy các class có tên vô nghĩa, hoặc thuộc về định dạng như : slick-slide, container, col-6, col-md-4, col-lg-3 ...
-    ```
+    
   2. Các cú pháp thường dùng khi sửa file  :
     
     
