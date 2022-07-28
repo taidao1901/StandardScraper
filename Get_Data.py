@@ -20,33 +20,12 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 
-def get_product_links(end): 
-    productlinks = []
-    for x in range(1,end+1):
-    
-    # Quan sát sự thay đổi trên đường link trang web rồi nhập sự thay đổi link ở đây.
-        r = requests.get('https://emwear.vn/collections/june-playlist')
-        soup = BeautifulSoup(r.content, 'lxml')
-    
-        # Nhập tên thẻ và class định hình các ô sản phẩm ở đây
-        productlist = soup.find_all('div', class_="product-image")
-    
-    
-        # Nhập tên thẻ và class chứa link sản phẩm ở đây
-        for item in productlist :
-            for link in item.find_all('a',href=True):
-            
-                # Nếu không lấy được link đầy đủ thì cộng thêm tên trang web vào trước
-                m='https://emwear.vn'+link['href']
-                print(m)
-                productlinks.append(m.strip())
-    return productlinks
+
 
 
 # In[5]:
 
 
-pl= get_product_links(1)
 
 
 # In[6]:
