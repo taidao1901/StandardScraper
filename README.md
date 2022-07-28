@@ -1,5 +1,5 @@
 # Standard Version
- - Anh điền đã tham gia.
+
 ## Setup Enviroment
 ```
 # using pip
@@ -33,19 +33,48 @@ conda create --name <env_name> --file requirements.txt
       
   ```
   4. Xác định tên các class cần thiết.
-   - Ví dụ:\
-   ![Ví dụ khối div chứa link](https://i.imgur.com/hb7db1Q.png)\
-   ```
-      # Tryền tên class của thẻ div chứa thẻ <a>
-      parent_tag = 'item'
-      # Truyền tên class của thẻ <a> bên trong.(Trong trường hợp này không có nên bỏ trống)
-      child_tag=''
-   ```
-   5.Lưu ý:
-   - Để kiểm tra xem việc lấy link các có ổn định hay không chạy lệnh.
-   ```
-    python main.py debug_links
-   ```
-### Lấy thông tin sản phẩm. 
+    * Ví dụ: 
+    ```
+    
+    ```
+    
+### Các bước thao tác với file Get_Data.py .
+  
+  1. Quy ước
+    
+    ```
+    - Tên_biến : các tên dùng để lưu trữ một giá trị như : name để lưu trữ tên, price để lưu trữ giá tiền 
+    - Tên_thẻ : tên các thẻ trong html như div, span, h1, img ...
+    - Tên_class : tên các class được đặt trong thẻ 
+    **Chú ý :** 
+    - Khi lấy class ưu tiên chọn những tên có ý nghĩa khi dịch ra tiếng Việt như : product, item ...
+    - Tránh lấy các class có tên vô nghĩa, hoặc thuộc về định dạng như : slick-slide, container, col-6, col-md-4, col-lg-3 ...
+    ```
+  2. Các cú pháp thường dùng khi sửa file  :
+    
+    
+    ```
+    **Lấy các thẻ**
+    - Lấy một thẻ :
+      > Tên_biến = soup.find('Tên_thẻ', class_="Tên_class")
+    - Lấy nhiều thẻ :
+      > Tên_biến = soup.find_all('Tên_thẻ', class_="Tên_class")
+    ```
+ 
+   
+    ```
+     ** Lấy thuộc tính của thẻ**
+    - Lấy một thuộc tính nào đó ( cái này tùy trường hợp có thể lấy được hoặc không)
+    - Lấy từng phần tử trong một biến chứa danh sách thẻ :
+      for i in Tên_biến :
+          Câu lệnh muốn dùng để sử lý các thẻ có trong danh sách thẻ.
+    - Lấy một thẻ trong nhiều thẻ
+    ```
+   
+  3. Các chỗ cần sửa
+    
+    
+   
+    
     
     
