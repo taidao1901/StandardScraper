@@ -47,10 +47,16 @@ def Get_product_url(content,rootlink='', parent_tag='', child_tag=''):
     productlinks=[]
     for product in product_list:
         # if a tag have class name then find it
-        if child_tag =='':
-            productlinks.append(rootlink + product.find_all('a',href=True)[0]['href'])
-        else: 
-            productlinks.append(rootlink + product.find_all('a',class_=child_tag,href=True)[0]['href'])
+        try:
+            if child_tag =='':
+                temp = product.find_all('a',href=True)[0]['href']
+
+            else: 
+                temp = product.find_all('a',class_=child_tag,href=True)[0]['href']
+            if '/' in temp:
+                    productlinks.append(rootlink + temp)
+        except:
+            pass
     # return link of products
     return productlinks
     
@@ -70,6 +76,7 @@ def Normal_Website(links, rootlink='', parent_tag='', child_tag='', dynamic = Fa
         while True:
             # get content in each page number per link
             content=''
+            print(link.format(number=num))
             if dynamic == False:
                 content = requests.get(link.format(number=num)).content
             else: 
@@ -123,17 +130,6 @@ def get_product_urls(links, rootlink='', parent_tag='', child_tag='',webtype='no
     
 
 
-if __name__ == '__main__':
-
-    links=['https://hades.vn/collections/all?page={number}']
-    rootlink='https://hades.vn'
-    parent_tag='product-img'
-    child_tag = 'image-resize'
-    webtype = 'normal'
-    dynamic= False
-    product_links= get_product_urls(links, rootlink=rootlink, parent_tag=parent_tag, child_tag=child_tag,webtype=webtype,dynamic=dynamic)
-    [print(x) for x in product_links]
-    print(len(product_links))
 
 
 

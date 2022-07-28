@@ -160,7 +160,7 @@ shop_url ='https://emwear.vn'
 
 
 
-now=now = datetime.now()
+now= datetime.now()
 scrap_day = now.strftime("%m/%d/%Y %H:%M:%S")
 tt=[shop_name,stylebox_shop_id,shop_url,scrap_day]
 
@@ -182,8 +182,6 @@ def get_data(productlink,isdynamic,tt=tt):
 # In[11]:
 
 
-for i in pl:
-    print(i)
 
 
 # In[13]:

@@ -1,8 +1,9 @@
 from GetProductUrls import get_product_urls
-#from Get_Product_Data import web_scraping
+from Get_Data import web_scraping
 import csv
 import json
 import sys
+from datetime import datetime
 def export_csv(file, kq):
     with open(file , 'w', encoding='utf-8') as f:
         writer = csv.writer(f)
@@ -36,15 +37,24 @@ if __name__ == '__main__':
     csvfilename  = 'gemclothing.csv'
     jsonfilename = 'gemclothing.json'
     # Tham số cho hàm lấy link các sản phẩm
-    links=['https://hades.vn/collections/all?page={number}']
-    rootlink='https://hades.vn'
-    parent_tag='product-img'
-    child_tag = 'image-resize'
-    webtype = 'normal'
+    links=['https://ananas.vn/product-list/']
+    rootlink=''
+    parent_tag='cont-item'
+    child_tag = ''
+    webtype = 'scroll'
     dynamic= False
+
+
     # Tham số cho hàm lấy thông tin sản phẩm
+    shop_name ='gemclothing'
+    stylebox_shop_id ='2'
+    shop_url ='https://gemclothing.vn'
 
 
+
+    now = datetime.now()
+    scrap_day = now.strftime("%m/%d/%Y %H:%M:%S")
+    tt=[shop_name,stylebox_shop_id,shop_url,scrap_day]
     # Get link products
     try: 
         product_links= get_product_urls(links, rootlink=rootlink, parent_tag=parent_tag, child_tag=child_tag,webtype=webtype,dynamic=dynamic)
@@ -64,9 +74,9 @@ if __name__ == '__main__':
     # Get infor products
     try:
         #Chỗ thêm tham số ở đây.
-        data = web_scraping(productlinks)
+        data = web_scraping(product_links,isdynamic=0,tt=tt)
         try: 
-            if sys.argv[1]=="debug_infor":
+            if sys.argv[2]=="debug_infor":
                 print('Thông tin 5 sản phẩm đầu tiên là:')
                 for i in range(5):
                     print(data[i])
