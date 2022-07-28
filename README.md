@@ -18,18 +18,24 @@ conda create --name <env_name> --file requirements.txt
     webtype= 'scroll'
   ```
   2. Xác định website dạng bình thường (False) hay động (True): Chỉnh tham số dynamic
-    ```
+  ```
       # website dạng bình thường
       dynamic= False
       # website dạng động
       dynammic = True
-    ```
+  ```
   3. Xác định (các) link trên website cần thu thập: Chỉnh tham số links
-    ```
-      # Đối với  web dạngcó số trang
+  ```
+      # Đối với  web dạng có số trang
       links = ['https://hades.vn/collections/top?page={number}','https://hades.vn/collections/bottoms?page={number}']
       # Đối với web dạng cuộn
       links = ['https://ssstutter.com/c/for-him','https://ssstutter.com/c/for-her']
       
+  ```
+  4. Xác định tên các class cần thiết.
+    * Ví dụ: 
     ```
+    
+    ```
+    
     
