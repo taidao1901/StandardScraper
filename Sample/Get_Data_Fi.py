@@ -54,9 +54,7 @@ def csv_to_json(csvFilePath, jsonFilePath):
         jsonf.write(jsonString.decode('utf-8'))
     return ''
 
-
 # In[4]:
-
 
 # Hàm này để suất ra file csv và json
 def export_csv_and_json(csvfilename, jsonfilename, data):
@@ -229,12 +227,7 @@ def get_product_data(productlink,config):
 
 # Hàm này để lấy data từ nhiều sản phẩm.
 
-def web_scraping(productlinks):
-    try:
-        with open('config.json', encoding='utf-8') as json_file:
-            config = json.load(json_file)
-    except:
-        print('Tên file json bị sai. Phải là config.json mới đúng.')
+def web_scraping(config,productlinks):
     
     print('Số sản phẩm khai thác được: ',len(productlinks))
     print('------------------------------------------------')

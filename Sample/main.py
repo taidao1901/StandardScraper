@@ -1,105 +1,65 @@
 from GetProductUrls import get_product_urls
-from Get_Data import web_scraping
+from Get_Data_Fi import web_scraping
 import csv
 import json
 import sys
 from datetime import datetime
 import traceback
 import time
-def export_csv(file, kq):
-    with open(file , 'w', encoding='utf-8') as f:
-        writer = csv.writer(f)
-        for i in kq:
-            writer.writerow(i)
-        f.close()
-    return 0
-def csv_to_json(csvFilePath, jsonFilePath):
-    jsonArray = []
-    with open(csvFilePath, encoding='utf-8') as csvf: 
-        csvReader = csv.DictReader(csvf)
-        for row in csvReader:
-            jsonArray.append(row)  
-            
-        for i in jsonArray:
-            empty_keys = [k for k,v in i.items() if not v]
-            for k in empty_keys:
-                del i[k]
-    with open(jsonFilePath, 'w', encoding='utf-8') as jsonf: 
-        
-        jsonString = json.dumps( jsonArray, ensure_ascii=False, indent=4).encode('utf8')
-        jsonf.write(jsonString.decode('utf-8'))
-def export_csv_and_json(csvfilename, jsonfilename, data):
-    export_csv(csvfilename, data)
-    csv_to_json(csvfilename, jsonfilename)
+import os
 
 
 
 if __name__ == '__main__':
-    # Tên file cần xuất
-    csvfilename  = 'gemclothing.csv'
-    jsonfilename = 'gemclothing.json'
 
-    # Tham số cho hàm lấy link các sản phẩm, SỬA THAM SỐ Ở ĐÂY
-    with open('config.json', encoding='utf-8') as cf:
-        config = json.load(cf)
-    product_links_config= config['product_links']
+    __location__ = os.path.abspath('..')
+    print(__location__)
+    configs_path = os.path.join(__location__, 'Config')
+    for filename in os.listdir(configs_path):
+        # Tham số cho hàm lấy link các sản phẩm, SỬA THAM SỐ Ở ĐÂY
+        with open(os.path.join(configs_path, filename), encoding='utf-8') as cf:
+            config = json.load(cf)
+        product_links_config= config['product_links']
 
-    links= str(product_links_config['links']).split(",")
-    rootlink= links[0]
-    parent_tag=product_links_config['parent_tag']
-    child_tag =product_links_config['child_tag']
-    webtype = product_links_config['webtype']
-    dynamic= bool(product_links_config['dynamic'])
-    button_class= product_links_config['button_class']
+        links= str(product_links_config['links']).split(",")
+        rootlink= links[0]
+        parent_tag=product_links_config['parent_tag']
+        child_tag =product_links_config['child_tag']
+        webtype = product_links_config['webtype']
+        dynamic= bool(product_links_config['dynamic'])
+        parent_but_class= product_links_config['parent_but_class']
+        button_class= product_links_config['button_class']
 
+        # #Get link products
+        start = time.time()
+        try: 
+            product_links= get_product_urls(links, rootlink=rootlink, parent_tag=parent_tag, child_tag=child_tag,webtype=webtype,dynamic=dynamic,parent_but_class=parent_but_class,button_class=button_class)
+            try:
+                if "debug_links" in sys.argv:
+                    print('Tổng số sản phẩm là:', len(product_links))
+                    print('5 link sản phẩm đầu tiên là: ')
+                    for i in range(5):
+                        print(product_links[i])
+            except:
+                pass
+        except Exception:
+            print('Lỗi lấy link sản phẩm')
+            traceback.print_exc()
+            exit()
+        print('Thời gian lấy link sản phẩm: ', time.time()-start)
 
-    # #Tham số cho hàm lấy thông tin sản phẩm, SỬA THAM SỐ Ở ĐÂY
-    # shop_name ='Gem'
-    # stylebox_shop_id ='4'
-    # shop_url ='https://gemclothing.vn/'
-
-
-
-    # now= datetime.now()
-    # scrap_day = now.strftime("%m/%d/%Y %H:%M:%S")
-    # tt=[shop_name,stylebox_shop_id,shop_url,scrap_day]
-    # tt.reverse()
-    # #Get link products
-    start = time.time()
-    try: 
-        product_links= get_product_urls(links, rootlink=rootlink, parent_tag=parent_tag, child_tag=child_tag,webtype=webtype,dynamic=dynamic,button_class=button_class)
+        # Get infor products
         try:
-            if "debug_links" in sys.argv:
-                print('Tổng số sản phẩm là:', len(product_links))
-                print('5 link sản phẩm đầu tiên là: ')
-                for i in range(5):
-                    print(product_links[i])
-        except:
-            pass
-    except Exception:
-        print('Lỗi lấy link sản phẩm')
-        traceback.print_exc()
-        exit()
-    print('Thời gian lấy link sản phẩm: ', time.time()-start)
-
-    # # Get infor products
-    # try:
-    #     #Chỗ thêm tham số ở đây.
-    #     data = web_scraping(product_links,isdynamic=0,tt=tt)
-    #     try: 
-    #         if "debug_infor" in sys.argv:
-    #             print('Thông tin 5 sản phẩm đầu tiên là:')
-    #             for i in range(5):
-    #                 print(data[i])
-    #     except:
-    #         pass
-    # except Exception:
-    #     print('Lỗi lấy thông tin sản phẩm')
-    #     traceback.print_exc()
-    #     exit()
-
-    # # Export data to csv&json file
-    # try: 
-    #     export_csv_and_json(csvfilename, jsonfilename, data)
-    # except:
-    #     print('Lỗi trong quá trình xuất file. Có thể do chưa sửa tên shop.')
+            #Chỗ thêm tham số ở đây.
+            data = web_scraping(config,product_links)
+            try: 
+                if "debug_infor" in sys.argv:
+                    print('Thông tin 5 sản phẩm đầu tiên là:')
+                    for i in range(5):
+                        print(data[i])
+            except:
+                pass
+        except Exception:
+            print('Lỗi lấy thông tin sản phẩm')
+            traceback.print_exc()
+            exit()
