@@ -44,12 +44,13 @@ input_info = {
             "woocommerce_value":"",
         },
 
-        "imgs": {
-            "img_parent_tag":"",
-            "img_parent_class":"",
+       "imgs": {
+            "have_parent":"",
+            "img_tag":"",
+            "img_class":"",
             "img_child_tag":"",
             "img_child_class":"",
-            "img_child_attribute":"",
+            "tag_attribute":"",
         }
     },
 
