@@ -40,27 +40,31 @@ if __name__ == '__main__':
     jsonfilename = 'gemclothing.json'
 
     # Tham số cho hàm lấy link các sản phẩm, SỬA THAM SỐ Ở ĐÂY
-    links= ['https://sobie.vn/collections/all']
+    with open('config.json', encoding='utf-8') as cf:
+        config = json.load(cf)
+    product_links_config= config['product_links']
+
+    links= str(product_links_config['links']).split(",")
     rootlink= links[0]
-    parent_tag='proloop-image'
-    child_tag = 'proloop-link'
-    webtype = 'scroll'
-    dynamic= False
-    button_class='btn-loadmore'
+    parent_tag=product_links_config['parent_tag']
+    child_tag =product_links_config['child_tag']
+    webtype = product_links_config['webtype']
+    dynamic= bool(product_links_config['dynamic'])
+    button_class= product_links_config['button_class']
 
 
-    #Tham số cho hàm lấy thông tin sản phẩm, SỬA THAM SỐ Ở ĐÂY
-    shop_name ='Gem'
-    stylebox_shop_id ='4'
-    shop_url ='https://gemclothing.vn/'
+    # #Tham số cho hàm lấy thông tin sản phẩm, SỬA THAM SỐ Ở ĐÂY
+    # shop_name ='Gem'
+    # stylebox_shop_id ='4'
+    # shop_url ='https://gemclothing.vn/'
 
 
 
-    now= datetime.now()
-    scrap_day = now.strftime("%m/%d/%Y %H:%M:%S")
-    tt=[shop_name,stylebox_shop_id,shop_url,scrap_day]
-    tt.reverse()
-    #Get link products
+    # now= datetime.now()
+    # scrap_day = now.strftime("%m/%d/%Y %H:%M:%S")
+    # tt=[shop_name,stylebox_shop_id,shop_url,scrap_day]
+    # tt.reverse()
+    # #Get link products
     start = time.time()
     try: 
         product_links= get_product_urls(links, rootlink=rootlink, parent_tag=parent_tag, child_tag=child_tag,webtype=webtype,dynamic=dynamic,button_class=button_class)

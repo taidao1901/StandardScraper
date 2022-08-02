@@ -23,7 +23,7 @@ def Dynamic_web(link,button_class=''):
         last_height = driver.execute_script("return document.body.scrollHeight")
         while True:
             # Scroll down to bottom
-            driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+            driver.execute_script("window.scrollTo(0, document.body.scrollHeight-1000);")
             if button_class!="":           
                 more_button = driver.find_element(by=By.CLASS_NAME, value=button_class)
                 driver.execute_script("arguments[0].click();", more_button)
