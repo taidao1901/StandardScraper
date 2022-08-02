@@ -30,15 +30,15 @@ def Dynamic_web(link,parent_but_class='',button_class=''):
             if parent_but_class!="":
                 try:
                     parent_but= driver.find_element(by=By.CLASS_NAME, value=parent_but_class)
-                    
                     if button_class!="":           
                         more_button = parent_but.find_element(by=By.CLASS_NAME, value=button_class)
                     else:
                         more_button = parent_but.find_element(by=By.TAG_NAME,value='a')
-                    if more_button!= NULL:
+                    if more_button:
                         driver.execute_script("arguments[0].click();", more_button)
                 except:
                     pass
+
             # Wait to load page
             sleep(5)
             # Calculate new scroll height and compare with last scroll height
