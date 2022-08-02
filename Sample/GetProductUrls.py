@@ -6,12 +6,16 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 from time import sleep
 import traceback
+import urllib.parse
+from selenium.webdriver.common.by import By
 
-def Dynamic_web(link):
+
+def Dynamic_web(link,button_class=''):
     '''
         Lấy nội dung html của dynamic website
             link: link của website
     '''
+
     try:
         # Get infor in a dynamic page
         driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
@@ -20,6 +24,9 @@ def Dynamic_web(link):
         while True:
             # Scroll down to bottom
             driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+            if button_class!="":           
+                more_button = driver.find_element(by=By.CLASS_NAME, value=button_class)
+                driver.execute_script("arguments[0].click();", more_button)
             # Wait to load page
             sleep(5)
             # Calculate new scroll height and compare with last scroll height
@@ -44,13 +51,13 @@ def Get_product_url(content,rootlink='', parent_tag='', child_tag=''):
             parent_tag: Class của thẻ div gần nhất
             child-tag: Class của thẻ a chứa link sản phẩm (Không truyền nếu không có tên class)
     '''
+    productlinks=[]
     try:
         # Convert content in page to beutifulsoup type
         soup = BeautifulSoup(content, 'html.parser')
 
         # find parent block that contain <a> tag
         product_list = soup.find_all('div', class_= parent_tag)
-        productlinks=[]
         for product in product_list:
             # if a tag have class name then find it
             try:
@@ -59,8 +66,8 @@ def Get_product_url(content,rootlink='', parent_tag='', child_tag=''):
 
                 else: 
                     temp = product.find_all('a',class_=child_tag,href=True)[0]['href']
-                if '/' in temp:
-                        productlinks.append(rootlink + temp)
+                if (temp!='') and (temp!='#'): 
+                    productlinks.append(urllib.parse.urljoin(rootlink,temp))
             except:
                 print('Không lấy được link sản phẩm.')
                 pass
@@ -103,7 +110,7 @@ def Normal_Website(links, rootlink='', parent_tag='', child_tag='', dynamic = Fa
                 break
     # return list product links in normal website
     return product_links
-def Scroll_Website(links, rootlink='', parent_tag='', child_tag=''):
+def Scroll_Website(links, rootlink='', parent_tag='', child_tag='',button_class=''):
     '''
         Hàm lấy link sản phẩm từ các trang dạng cuộn
             links: Danh sách link lấy sản phẩm. Ví dụ: ['https://ssstutter.com/c/for-him','https://ssstutter.com/c/for-her']
@@ -114,11 +121,11 @@ def Scroll_Website(links, rootlink='', parent_tag='', child_tag=''):
     # excute in each link in links
     product_links = []
     for link in links:
-        content = Dynamic_web(link)
+        content = Dynamic_web(link,button_class)
         product_links = product_links + Get_product_url(content,rootlink, parent_tag, child_tag)
     return product_links
 
-def get_product_urls(links, rootlink='', parent_tag='', child_tag='',webtype='normal',dynamic=False):
+def get_product_urls(links, rootlink='', parent_tag='', child_tag='',webtype='normal',dynamic=False,button_class=""):
     '''
         Hàm chính lấy link các sản phẩm của một website
             links: Danh sách link lấy sản phẩm.
@@ -132,7 +139,7 @@ def get_product_urls(links, rootlink='', parent_tag='', child_tag='',webtype='no
         product_links = Normal_Website(links, rootlink, parent_tag, child_tag, dynamic)
         return product_links
     elif webtype == 'scroll':
-        product_links = Scroll_Website(links,rootlink,parent_tag,child_tag)
+        product_links = Scroll_Website(links,rootlink,parent_tag,child_tag,button_class)
         return product_links
     else: 
         print('Webtype không tồn tại')
