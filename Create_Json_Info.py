@@ -45,7 +45,7 @@ input_info = {
         },
 
        "imgs": {
-            "have_parent":"",
+            "have_child":"",
             "img_tag":"",
             "img_class":"",
             "img_child_tag":"",
