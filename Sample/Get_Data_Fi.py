@@ -229,12 +229,7 @@ def get_product_data(productlink,config):
 
 # Hàm này để lấy data từ nhiều sản phẩm.
 
-def web_scraping(productlinks):
-    try:
-        with open('config.json', encoding='utf-8') as json_file:
-            config = json.load(json_file)
-    except:
-        print('Tên file json bị sai. Phải là config.json mới đúng.')
+def web_scraping(productlinks,config):
     
     print('Số sản phẩm khai thác được: ',len(productlinks))
     print('------------------------------------------------')
