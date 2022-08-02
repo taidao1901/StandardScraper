@@ -227,7 +227,11 @@ def get_product_data(productlink,config):
 
 # Hàm này để lấy data từ nhiều sản phẩm.
 
+<<<<<<< HEAD
 def web_scraping(config,productlinks):
+=======
+def web_scraping(productlinks,config):
+>>>>>>> 5e308194b150cd1b982c8881d48f68b9b4d46b8c
     
     print('Số sản phẩm khai thác được: ',len(productlinks))
     print('------------------------------------------------')
