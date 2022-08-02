@@ -14,7 +14,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
-
+import os
 import csv
 import json
 
@@ -227,11 +227,7 @@ def get_product_data(productlink,config):
 
 # Hàm này để lấy data từ nhiều sản phẩm.
 
-<<<<<<< HEAD
-def web_scraping(config,productlinks):
-=======
-def web_scraping(productlinks,config):
->>>>>>> 5e308194b150cd1b982c8881d48f68b9b4d46b8c
+def web_scraping(config,productlinks,path_file):
     
     print('Số sản phẩm khai thác được: ',len(productlinks))
     print('------------------------------------------------')
@@ -247,8 +243,8 @@ def web_scraping(productlinks,config):
         m=get_product_data(i,config)
         data.append(m)
     
-    csvfilename = config['csv_file_name']
-    jsonfilename = config['json_file_name']
+    csvfilename = os.path.join(path_file, config['csv_file_name'])
+    jsonfilename = os.path.join(path_file, config['json_file_name'])
     export_csv_and_json(csvfilename, jsonfilename, data)
     return 'Oki we done :))'
 

@@ -8,7 +8,6 @@
     "csv_file_name": "Sobie.csv",
 
     "product_links": {
-
         "links": "https://sobie.vn/collections/all",
         "parent_tag":"proloop-image",
         "child_tag":"",
@@ -21,8 +20,8 @@
 
     "main_info": {
         "product_name": {
-                "name_tag": "h3",
-                "name_class": "m"
+                "name_tag": "h1",
+                "name_class": ""
         },
         "original_price": {
                 "original_price_tag": "span",

@@ -21,7 +21,7 @@
 
     "main_info": {
         "product_name": {
-                "name_tag": "h2",
+                "name_tag": "h1",
                 "name_class": ""
         },
         "original_price": {

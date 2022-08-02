@@ -137,16 +137,28 @@ def Scroll_Website(links, rootlink='', parent_tag='', child_tag='',parent_but_cl
         product_links = product_links + Get_product_url(content,rootlink, parent_tag, child_tag)
     return product_links
 
-def get_product_urls(links, rootlink='', parent_tag='', child_tag='',webtype='normal',dynamic=False,parent_but_class='',button_class=""):
+def get_product_urls(config):
     '''
         Hàm chính lấy link các sản phẩm của một website
-            links: Danh sách link lấy sản phẩm.
-            rootlink: Dùng cho các trang dùng địa chỉ tương đối ( Không truyển nếu trang dùng địa chỉ tuyệt đối)
-            parent_tag: Class thẻ div bên ngoài thẻ a
-            child_tag: Class của thẻ a chứa link sản phẩm (Không truyền nếu không có tên class)
-            webtype: loại website, mặc định là normal ('normal': cho các website sử dụng số trang, 'scroll': cho các website dạng cuộn)
-            dynamic: Có phải dạng dynamic website hay không, mặc đinh là False(False: cho các website không phải dạng dynamic, True: ngược lại )
+            config chứa các thông tin như:
+                links: Danh sách link lấy sản phẩm.
+                rootlink: Dùng cho các trang dùng địa chỉ tương đối ( Không truyển nếu trang dùng địa chỉ tuyệt đối)
+                parent_tag: Class thẻ div bên ngoài thẻ a
+                child_tag: Class của thẻ a chứa link sản phẩm (Không truyền nếu không có tên class)
+                webtype: loại website, mặc định là normal ('normal': cho các website sử dụng số trang, 'scroll': cho các website dạng cuộn)
+                dynamic: Có phải dạng dynamic website hay không, mặc đinh là False(False: cho các website không phải dạng dynamic, True: ngược lại )
     '''
+    
+    product_links_config= config['product_links']
+
+    links= str(product_links_config['links']).split(",")
+    rootlink= links[0]
+    parent_tag=product_links_config['parent_tag']
+    child_tag =product_links_config['child_tag']
+    webtype = product_links_config['webtype']
+    dynamic= bool(product_links_config['dynamic'])
+    parent_but_class= product_links_config['parent_but_class']
+    button_class= product_links_config['button_class']
     if webtype== 'normal':
         product_links = Normal_Website(links, rootlink, parent_tag, child_tag, dynamic)
         product_links=list(set(product_links))
