@@ -23,7 +23,7 @@ if __name__ == '__main__':
             except:
                 print('Lỗi định dạng file config. Copy lại file mẫu rồi sửa lại<')
                 exit()
-        result_folder_name = config['stylebox_shop_id'] + '_'+config['shop_name']
+        result_folder_name = config['stylebox_shop_id'] +'_'+config['shop_name']
         #Get link products
         start = time.time()
         try: 
@@ -40,21 +40,27 @@ if __name__ == '__main__':
             print('Lỗi lấy link sản phẩm')
             traceback.print_exc()
             exit()
-        
+    # with open("demofile2.txt", "a") as f:
+    #     for i in product_links:
+    #         f.write(i)
+    #         f.write("\n")
+
+    #     f.close()
+
         # Get infor products
-        try:
-            if os.path.exists(os.path.join(result_path, result_folder_name))==False:
-                os.mkdir(os.path.join(result_path, result_folder_name))
-            data = web_scraping(config, product_links, os.path.join(result_path, result_folder_name))
-            try: 
-                if "debug_infor" in sys.argv:
-                    print('Thông tin 5 sản phẩm đầu tiên là:')
-                    for i in range(5):
-                        print(data[i])
-            except:
-                pass
-        except Exception:
-            print('Lỗi lấy thông tin sản phẩm')
-            traceback.print_exc()
-            exit()
-        print('Thời gian lấy link sản phẩm: ', time.time()-start)
+        # try:
+        #     if os.path.exists(os.path.join(result_path, result_folder_name))==False:
+        #         os.mkdir(os.path.join(result_path, result_folder_name))
+        #     data = web_scraping(config, product_links, os.path.join(result_path, result_folder_name))
+        #     try: 
+        #         if "debug_infor" in sys.argv:
+        #             print('Thông tin 5 sản phẩm đầu tiên là:')
+        #             for i in range(5):
+        #                 print(data[i])
+        #     except:
+        #         pass
+        # except Exception:
+        #     print('Lỗi lấy thông tin sản phẩm')
+        #     traceback.print_exc()
+        #     exit()
+        # print('Thời gian lấy link sản phẩm: ', time.time()-start)

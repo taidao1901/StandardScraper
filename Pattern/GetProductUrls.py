@@ -10,12 +10,12 @@ import urllib.parse
 from selenium.webdriver.common.by import By
 
 
-def Dynamic_web(link,parent_but_class='',button_class=''):
+def Dynamic_web(link,parent_btn_class='',btn_class=''):
     '''
         Lấy nội dung html của dynamic website
             link: link của website
-            parent_but_class : class của thẻ <div> cha chứa chứa button
-            button_class : class của button
+            parent_btn_class : class của thẻ <div> cha chứa chứa button
+            btn_class : class của button
             ''
     '''
 
@@ -27,11 +27,11 @@ def Dynamic_web(link,parent_but_class='',button_class=''):
         while True:
             # Scroll down to bottom
             driver.execute_script("window.scrollTo(0, document.body.scrollHeight-1000);")
-            if parent_but_class!="":
+            if parent_btn_class!="":
                 try:
-                    parent_but= driver.find_element(by=By.CLASS_NAME, value=parent_but_class)
-                    if button_class!="":           
-                        more_button = parent_but.find_element(by=By.CLASS_NAME, value=button_class)
+                    parent_but= driver.find_element(by=By.CLASS_NAME, value=parent_btn_class)
+                    if btn_class!="":           
+                        more_button = parent_but.find_element(by=By.CLASS_NAME, value=btn_class)
                     else:
                         more_button = parent_but.find_element(by=By.TAG_NAME,value='a')
                     if more_button:
@@ -48,6 +48,7 @@ def Dynamic_web(link,parent_but_class='',button_class=''):
             last_height = new_height
         
         # Convert to html type
+
         sele = driver.execute_script("return document.getElementsByTagName('html')[0].innerHTML")
         return sele
     except Exception:
@@ -55,33 +56,37 @@ def Dynamic_web(link,parent_but_class='',button_class=''):
         traceback.print_exc()
 
 
-def Get_product_url(content,rootlink='', parent_tag='', child_tag=''):
+def Get_product_url(content,rootlink='',parent_atag_tag='', parent_atag_class='', atag_class='',same_string=''):
     '''
         Lấy các url sản phẩm trên 1 trang.
             content: Nội dung của trang
             rootlink: Dùng cho các trang dùng địa chỉ tương đối ( Không truyển nếu trang dùng địa chỉ tuyệt đối)
-            parent_tag: Class của thẻ div gần nhất
+            parent_atag_class: Class của thẻ div gần nhất
             child-tag: Class của thẻ a chứa link sản phẩm (Không truyền nếu không có tên class)
     '''
     productlinks=[]
     try:
         # Convert content in page to beutifulsoup type
         soup = BeautifulSoup(content, 'html.parser')
+        print(same_string)
 
         # find parent block that contain <a> tag
-        product_list = soup.find_all('div', class_= parent_tag)
+        product_list = soup.find_all(parent_atag_tag, class_= parent_atag_class)
         for product in product_list:
             # if a tag have class name then find it
             try:
-                if child_tag =='':
-                    temp = product.find_all('a',href=True)[0]['href']
+                if atag_class =='':
 
+                    temp = product.find_all('a',href=True)[0]['href']
                 else: 
-                    temp = product.find_all('a',class_=child_tag,href=True)[0]['href']
-                if (temp!='') and (temp!='#'): 
-                    productlinks.append(urllib.parse.urljoin(rootlink,temp))
-            except:
-                print('Không lấy được link sản phẩm.')
+                    temp = product.find_all('a',class_=atag_class,href=True)[0]['href']
+                if (temp!='') and (temp!='#'):
+                    product_link = urllib.parse.urljoin(rootlink,temp)
+                    check_link = product_link.split('/')
+                    if (same_string in check_link):
+                        productlinks.append(product_link)
+            except :
+                print('Không lấy được link sản phẩm:')
                 pass
     except Exception:
         print('Lỗi phần lấy link sản phẩm')
@@ -89,13 +94,13 @@ def Get_product_url(content,rootlink='', parent_tag='', child_tag=''):
     # return link of products
     return productlinks
     
-def Normal_Website(links, rootlink='', parent_tag='', child_tag='', dynamic = False):
+def Normal_Website(links, rootlink='', parent_atag_tag='',parent_atag_class='', atag_class='', dynamic = False, same_string=''):
     '''
         Hàm lấy thông tin của các trang có số trang
             links: Truyền danh sách link lấy sản phẩm. Ví dụ: ['https://hades.vn/collections/top?page={number}','https://hades.vn/collections/bottoms?page={number}']']
             rootlink: Dùng cho các trang dùng địa chỉ tương đối ( Không truyển nếu trang dùng địa chỉ tuyệt đối)
-            parent_tag: Class thẻ div bên ngoài thẻ a
-            child_tag: Class của thẻ a chứa link sản phẩm (Không truyền nếu không có tên class)
+            parent_atag_class: Class thẻ div bên ngoài thẻ a
+            atag_class: Class của thẻ a chứa link sản phẩm (Không truyền nếu không có tên class)
     '''
     product_links = []
 
@@ -113,7 +118,7 @@ def Normal_Website(links, rootlink='', parent_tag='', child_tag='', dynamic = Fa
 
             # Calculate new list length and compare with last list length
             length_link= len(product_links)
-            product_links = product_links + Get_product_url(content,rootlink, parent_tag, child_tag)
+            product_links = product_links + Get_product_url(content,rootlink,parent_atag_tag, parent_atag_class, atag_class, same_string)
 
             # if length is changed, increase page number
             if length_link< len(product_links):
@@ -122,19 +127,19 @@ def Normal_Website(links, rootlink='', parent_tag='', child_tag='', dynamic = Fa
                 break
     # return list product links in normal website
     return product_links
-def Scroll_Website(links, rootlink='', parent_tag='', child_tag='',parent_but_class ='',button_class=''):
+def Scroll_Website(links, rootlink='', parent_atag_tag='', parent_atag_class='', atag_class='',parent_btn_class ='',btn_class='',same_string=''):
     '''
         Hàm lấy link sản phẩm từ các trang dạng cuộn
             links: Danh sách link lấy sản phẩm. Ví dụ: ['https://ssstutter.com/c/for-him','https://ssstutter.com/c/for-her']
             rootlink: Dùng cho các trang dùng địa chỉ tương đối ( Không truyển nếu trang dùng địa chỉ tuyệt đối)
-            parent_tag: Class thẻ div bên ngoài thẻ a
-            child_tag: Class của thẻ a chứa link sản phẩm (Không truyền nếu không có tên class)
+            parent_atag_class: Class thẻ div bên ngoài thẻ a
+            atag_class: Class của thẻ a chứa link sản phẩm (Không truyền nếu không có tên class)
     '''
     # excute in each link in links
     product_links = []
     for link in links:
-        content = Dynamic_web(link,parent_but_class,button_class)
-        product_links = product_links + Get_product_url(content,rootlink, parent_tag, child_tag)
+        content = Dynamic_web(link,parent_btn_class,btn_class)
+        product_links = product_links + Get_product_url(content,rootlink,parent_atag_tag, parent_atag_class, atag_class,same_string)
     return product_links
 
 def get_product_urls(config):
@@ -143,8 +148,8 @@ def get_product_urls(config):
             config chứa các thông tin như:
                 links: Danh sách link lấy sản phẩm.
                 rootlink: Dùng cho các trang dùng địa chỉ tương đối ( Không truyển nếu trang dùng địa chỉ tuyệt đối)
-                parent_tag: Class thẻ div bên ngoài thẻ a
-                child_tag: Class của thẻ a chứa link sản phẩm (Không truyền nếu không có tên class)
+                parent_atag_class: Class thẻ div bên ngoài thẻ a
+                atag_class: Class của thẻ a chứa link sản phẩm (Không truyền nếu không có tên class)
                 webtype: loại website, mặc định là normal ('normal': cho các website sử dụng số trang, 'scroll': cho các website dạng cuộn)
                 dynamic: Có phải dạng dynamic website hay không, mặc đinh là False(False: cho các website không phải dạng dynamic, True: ngược lại )
     '''
@@ -153,19 +158,27 @@ def get_product_urls(config):
 
     links= str(product_links_config['links']).split(",")
     rootlink= links[0]
-    parent_tag=product_links_config['parent_tag']
-    child_tag =product_links_config['child_tag']
+
+    product_block = product_links_config['product_block']
+    parent_atag_tag = product_block['parent_atag_tag']
+    parent_atag_class=product_block['parent_atag_class']
+    atag_class =product_block['atag_class']
+
     webtype = product_links_config['webtype']
-    dynamic= bool(product_links_config['dynamic'])
-    parent_but_class= product_links_config['parent_but_class']
-    button_class= product_links_config['button_class']
+
+    dynamic= bool(config['isdynamic'])
+    same_string= product_links_config['same_string']
+    scroll_btn_type= product_links_config['scroll_btn_type']
+    parent_btn_class= scroll_btn_type['parent_btn_class']
+    btn_class= scroll_btn_type['btn_class']
+
     if webtype== 'normal':
-        product_links = Normal_Website(links, rootlink, parent_tag, child_tag, dynamic)
+        product_links = Normal_Website(links, rootlink,parent_atag_tag, parent_atag_class, atag_class, dynamic, same_string)
         product_links=list(set(product_links))
 
         return product_links
     elif webtype == 'scroll':
-        product_links = Scroll_Website(links,rootlink,parent_tag,child_tag,parent_but_class, button_class)
+        product_links = Scroll_Website(links,rootlink,parent_atag_tag, parent_atag_class,atag_class,parent_btn_class, btn_class, same_string)
         product_links=list(set(product_links))
         return product_links
     else: 
