@@ -195,31 +195,3 @@ def Test_Data(productlink,config):
     html_soure=get_html_source_test(productlink,config)
     data =get_product_info_test(html_soure,productlink,config)
     return ''
-    
-
-
-# In[5]:
-
-
-productlink ='https://www.themavensaigon.com/collections/all-items/products/quince-dress'
-with open('config.json', encoding='utf-8') as json_file:
-            config = json.load(json_file)
-
-
-# In[6]:
-
-
-Test_Data(productlink,config)
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-

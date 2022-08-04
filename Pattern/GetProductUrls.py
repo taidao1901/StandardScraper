@@ -22,13 +22,13 @@ def dynamic_web(link,parent_btn_class='',btn_class=''):
     try:
         # Get infor in a dynamic page
         driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
-        driver.get(link,verify =False)
+        driver.get(link)
         last_height = driver.execute_script("return document.body.scrollHeight")
         while True:
             # Scroll down to bottom
-            for  i in   (4000,2000,1000,0):
-                driver.execute_script("window.scrollTo(0, document.body.scrollHeight-i);")
-                sleep(1)
+            # for  height in  (4000,2000,1000,0):
+            driver.execute_script("window.scrollTo(0, document.body.scrollHeight-1000);")
+                # sleep(1)
             if parent_btn_class!="":
                 try:
                     parent_but= driver.find_element(by=By.CLASS_NAME, value=parent_btn_class)

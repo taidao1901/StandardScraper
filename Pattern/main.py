@@ -1,3 +1,4 @@
+from Get_Product_Info_Test import Test_Data
 from GetProductUrls import get_product_urls
 from Get_Data_Fi import web_scraping
 import csv
@@ -44,20 +45,20 @@ if __name__ == '__main__':
             traceback.print_exc()
             exit()
 
+    
         # Get infor products
-        # try:
-        #     if os.path.exists(os.path.join(result_path, result_folder_name))==False:
-        #         os.mkdir(os.path.join(result_path, result_folder_name))
-        #     data = web_scraping(config, product_links, os.path.join(result_path, result_folder_name))
-        #     try: 
-        #         if "debug_infor" in sys.argv:
-        #             print('Thông tin 5 sản phẩm đầu tiên là:')
-        #             for i in range(5):
-        #                 print(data[i])
-        #     except:
-        #         pass
-        # except Exception:
-        #     print('Lỗi lấy thông tin sản phẩm')
-        #     traceback.print_exc()
-        #     exit()
-        # print('Thời gian lấy link sản phẩm: ', time.time()-start)
+        try:
+            if "debug_infor" in sys.argv:
+                Test_Data(product_links[0], config)
+            else:
+                if os.path.exists(os.path.join(result_path, result_folder_name))==False:
+                    os.mkdir(os.path.join(result_path, result_folder_name))
+                data = web_scraping(config, product_links, os.path.join(result_path, result_folder_name))
+            
+            print('Thời gian lấy link sản phẩm: ', time.time()-start)
+            exit()
+        except Exception:
+            print('Lỗi lấy thông tin sản phẩm')
+            traceback.print_exc()
+            exit()
+        
