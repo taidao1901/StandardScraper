@@ -230,8 +230,6 @@ def get_product_data(productlink,config):
 def web_scraping(config,productlinks,path_file):
     
     print('Số sản phẩm khai thác được: ',len(productlinks))
-    print('------------------------------------------------')
-    print('Link các sản phẩm đã khai thác xong : ')
     
     data=[]
     data.append(['shop_name','stylebox_shop_id','shop_url','product_url','product_name','original_price','imgs','scrape_date','discounted_price','review','size','color','description_1','description_2','rating'])
@@ -246,7 +244,8 @@ def web_scraping(config,productlinks,path_file):
     csvfilename = os.path.join(path_file, config['csv_file_name'])
     jsonfilename = os.path.join(path_file, config['json_file_name'])
     export_csv_and_json(csvfilename, jsonfilename, data)
-    return 'Oki we done :))'
+    pritn('Oki we done :))')
+    return ''
 
 
 # In[10]:
