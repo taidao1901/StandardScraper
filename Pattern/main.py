@@ -7,6 +7,8 @@ from datetime import datetime
 import traceback
 import time
 import os
+import urllib3
+
 
 
 
@@ -15,6 +17,7 @@ if __name__ == '__main__':
     print(__location__)
     configs_path = os.path.join(__location__, 'Config')
     result_path = os.path.join(__location__, 'Results')
+    urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
     for filename in os.listdir(configs_path):
         # Tham số cho hàm lấy link các sản phẩm, SỬA THAM SỐ Ở ĐÂY
         with open(os.path.join(configs_path, filename), encoding='utf-8') as cf:
@@ -40,12 +43,6 @@ if __name__ == '__main__':
             print('Lỗi lấy link sản phẩm')
             traceback.print_exc()
             exit()
-    # with open("demofile2.txt", "a") as f:
-    #     for i in product_links:
-    #         f.write(i)
-    #         f.write("\n")
-
-    #     f.close()
 
         # Get infor products
         # try:

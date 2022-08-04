@@ -1,24 +1,24 @@
 {
     
-    "shop_name": "Ananas",
-    "stylebox_shop_id": "12",
-    "shop_url": "https://ananas.vn/",
-    "isdynamic": "0",
-    "json_file_name": "ANANAS.json",
-    "csv_file_name": "ANANAS.csv",
+    "shop_name": "highclub",
+    "stylebox_shop_id": "7",
+    "shop_url": "www.boldbikini.vn",
+    "isdynamic": 0,
+    "json_file_name": "wephobia.json",
+    "csv_file_name": "wephobia.csv",
 
     "product_links": {
 
-        "links": "https://ananas.vn/product-list/",
+        "links": "https://katjewelry.vn/nhan-bac-cao-cap-cho-nu?q=collections:1610733&page={number}&view=grid,https://katjewelry.vn/bong-tai-bac-nu-cao-cap?q=collections:1610718&page={number}&view=grid",
 
-        "same_string": "product-detail",
+        "same_string": "",
 
         "product_block":{
-            "parent_atag_tag": "h3",
-            "parent_atag_class":"name",
-            "atag_class":""
+            "parent_atag_tag": "p",
+            "parent_atag_class":"product-name",
+            "atag_class":"line-clamp"
         },
-        "webtype":"scroll",
+        "webtype":"normal",
 
         "scroll_btn_type":{
             "parent_btn_class": "",
