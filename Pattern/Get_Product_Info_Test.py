@@ -27,7 +27,7 @@ import json
 def get_html_source_test(productlink,config):
     isdynamic = config['isdynamic']
     
-    if isdynamic == '0':
+    if isdynamic == 0:
         try:
             r = requests.get(productlink)
             soup = BeautifulSoup(r.text,'lxml')
@@ -119,14 +119,14 @@ def get_product_info_test(html_soure,productlink,config):
         
     # Lấy ảnh sản phẩm 
     img = main_info['imgs']
-    have_child = img['have_child']
+    have_parent = img['have_parent']
     img_tag = img['img_tag']
     img_class = img['img_class']
-    img_child_tag = img['img_child_tag']
-    img_child_class = img['img_child_class']
-    tag_attribute = img['tag_attribute']
+    img_parent_tag = img['img_parent_tag']
+    img_parent_class = img['img_parent_class']
+    tag_attribute = img['img_tag_attribute']
     
-    if have_child == '0':
+    if have_parent == 0:
         try:
             img = soup.find_all(img_tag, class_=img_class)
             print('Các thẻ ảnh :')
@@ -148,13 +148,13 @@ def get_product_info_test(html_soure,productlink,config):
         link=[]
         tag =[]
         try:
-            img = soup.find_all(img_tag, class_= img_class)
-            print('Thẻ lớn lấy được :')
+            img = soup.find_all(img_parent_tag, class_= img_parent_class)
+            print('Thẻ cha lấy được : \n')
             print(img[0])
             print('\n')
             
             for i in img:
-                m = i.find(img_child_tag, class_= img_child_class)
+                m = i.find(img_tag, class_= img_class)
                 if m != None:
                     tag.append(m)
             print('Thẻ con lấy được :')
@@ -165,7 +165,7 @@ def get_product_info_test(html_soure,productlink,config):
             print('img_tag hoặc img_class hoặc img_child_tag hoặc img_child_class bị sai.')
         for j in tag:
             try:
-                ha= j[tag_attribute]
+                ha= j[img_tag_attribute]
                 link.append(ha)
             except:
                 pass
@@ -179,7 +179,6 @@ def get_product_info_test(html_soure,productlink,config):
     for m in imgs :
         print(m)
 
-    
     
     return ''
         

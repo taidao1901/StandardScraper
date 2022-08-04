@@ -1,0 +1,60 @@
+{
+    
+    "shop_name": "Salom",
+    "stylebox_shop_id": "387",
+    "shop_url": "https://www.salom.vn/",
+    "isdynamic": 0,
+    
+
+    "product_links": {
+
+        "links": "https://www.salom.vn/shop/page/{number}/",
+
+        "same_string": "",
+
+        "product_block":{
+            "parent_atag_tag": "p",
+            "parent_atag_class":"product-title",
+            "atag_class":""
+        },
+        "webtype":"normal",
+
+        "scroll_btn_type":{
+            "parent_btn_class": "",
+            "btn_class":""
+        }
+
+    },
+
+
+    "main_info": {
+        "product_name": {
+                "name_tag": "h1",
+                "name_class": "product-title"
+        },
+        "original_price": {
+                "original_price_tag": "",
+                "original_price_class": "",
+                "is_woocommerce": 1,
+                "woocommerce_value": 0
+        },
+        "imgs": {
+                "have_parent": 1,
+                "img_tag": "div",
+                "img_class": "woocommerce-product-gallery__image",
+                "img_child_tag": "a",
+                "img_child_class": "",
+                "tag_attribute": "href"
+        }
+    },
+    "sub_info": {
+        "discounted_price": "",
+        "review": "",
+        "size": "",
+        "color": "",
+        "description_1": "",
+        "description_2": "",
+        "rating": ""
+    }
+    
+}

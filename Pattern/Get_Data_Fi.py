@@ -80,7 +80,7 @@ def export_csv_and_json(csvfilename, jsonfilename, data):
 def get_html_source(productlink,config):
     isdynamic = config['isdynamic']
     
-    if isdynamic == '0':
+    if isdynamic == 0:
         try:
             r = requests.get(productlink)
             soup = BeautifulSoup(r.text,'lxml')
@@ -145,7 +145,7 @@ def get_product_info(html_soure,productlink,config):
     price_class = price['original_price_class']
     is_woocommerce = price['is_woocommerce']
     woocommerce_value = price['woocommerce_value']
-    if is_woocommerce=='0':
+    if is_woocommerce==0:
         try:
             original_price = soup.find(price_tag, class_=price_class).text.strip()
         except:
@@ -162,14 +162,14 @@ def get_product_info(html_soure,productlink,config):
         
     # Lấy ảnh sản phẩm 
     img = main_info['imgs']
-    have_parent = img['have_child']
+    have_parent = img['have_parent']
     img_tag = img['img_tag']
     img_class = img['img_class']
-    img_child_tag = img['img_child_tag']
-    img_child_class = img['img_child_class']
-    tag_attribute = img['tag_attribute']
+    img_parent_tag = img['img_parent_tag']
+    img_parent_class = img['img_parent_class']
+    tag_attribute = img['img_tag_attribute']
     
-    if have_parent == '0':
+    if have_parent == 0:
         try:
             img = soup.find_all(img_tag, class_=img_class)
             link = [i[tag_attribute] for i in img]
@@ -182,9 +182,9 @@ def get_product_info(html_soure,productlink,config):
         link=[]
         tag =[]
         try:
-            img = soup.find_all(img_tag, class_= img_class)
+            img = soup.find_all(img_parent_tag, class_= img_parent_class)
             for i in img:
-                m = i.find(img_child_tag, class_= img_child_class) 
+                m = i.find(img_tag, class_= img_class) 
                 if m != None:
                     tag.append(m)
         except:
@@ -227,7 +227,7 @@ def get_product_data(productlink,config):
 
 # Hàm này để lấy data từ nhiều sản phẩm.
 
-def web_scraping(config,productlinks,path_file):
+def web_scraping(config,productlinks,path_file,):
     
     print('Số sản phẩm khai thác được: ',len(productlinks))
     
@@ -236,15 +236,15 @@ def web_scraping(config,productlinks,path_file):
     
     count=1
     for i in productlinks:
-        print(count,' : ',i)
+        #print(count,' : ',i)
         count+=1
         m=get_product_data(i,config)
         data.append(m)
     
-    csvfilename = os.path.join(path_file, config['csv_file_name'])
-    jsonfilename = os.path.join(path_file, config['json_file_name'])
+    csvfilename = os.path.join(path_file,"x. SHOP_ID_{}.csv".format(config['stylebox_shop_id']))
+    jsonfilename = os.path.join(path_file,"x. SHOP_ID_{}.json".format(config['stylebox_shop_id']))
     export_csv_and_json(csvfilename, jsonfilename, data)
-    pritn('Oki we done :))')
+    print('Oki we done :))')
     return ''
 
 

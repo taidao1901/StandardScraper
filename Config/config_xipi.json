@@ -4,8 +4,6 @@
     "stylebox_shop_id": "21",
     "shop_url": "https://xipi.vn/",
     "isdynamic": 0,
-    "json_file_name": "x. SHOP_ID_21.json",
-    "csv_file_name": "x. SHOP_ID_21.csv",
 
     "product_links": {
 
@@ -41,11 +39,11 @@
         },
         "imgs": {
                 "have_parent": 0,
+                "img_parent_tag": "",
+                "img_parent_class": "",
                 "img_tag": "img",
                 "img_class": "img-responsive",
-                "img_child_tag": "",
-                "img_child_class": "",
-                "tag_attribute": "src"
+                "img_tag_attribute": "src"
         }
     },
     "sub_info": {

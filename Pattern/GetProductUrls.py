@@ -26,24 +26,27 @@ def dynamic_web(link,parent_btn_class='',btn_class=''):
         last_height = driver.execute_script("return document.body.scrollHeight")
         while True:
             # Scroll down to bottom
-            # for  height in  (4000,2000,1000,0):
-            driver.execute_script("window.scrollTo(0, document.body.scrollHeight-1000);")
-                # sleep(1)
-            if parent_btn_class!="":
-                try:
-                    parent_but= driver.find_element(by=By.CLASS_NAME, value=parent_btn_class)
-                    if btn_class!="":           
-                        more_button = parent_but.find_element(by=By.CLASS_NAME, value=btn_class)
-                    else:
-                        more_button = parent_but.find_element(by=By.TAG_NAME,value='a')
-                    if more_button:
-                        driver.execute_script("arguments[0].click();", more_button)
-                except:
-                    print('Không tìm thấy nút xem thêm. Kiểm tra lại scroll_btn_type')
-                    pass
+            for  i in  (2500,1000):  
+                driver.execute_script("window.scrollTo(0,document.body.scrollHeight - arguments[0]);",i)
+                sleep(1)
+            try:
+                if parent_btn_class!="":
+                    try:
+                        parent_but= driver.find_element(by=By.CLASS_NAME, value=parent_btn_class)
+                        if btn_class!="":           
+                            more_button = parent_but.find_element(by=By.CLASS_NAME, value=btn_class)
+                        else:
+                            more_button = parent_but.find_element(by=By.TAG_NAME,value='a')
+                        if more_button:
+                            driver.execute_script("arguments[0].click();", more_button)
+                    except:
+                        print('Không tìm thấy nút xem thêm. Kiểm tra lại scroll_btn_type')
+                        pass
+            except:
+                pass
 
             # Wait to load page
-            sleep(5)
+            sleep(3)
             # Calculate new scroll height and compare with last scroll height
             new_height = driver.execute_script("return document.body.scrollHeight")
             if new_height == last_height:
@@ -120,7 +123,7 @@ def Normal_Website(links, rootlink='', parent_atag_tag='',parent_atag_class='', 
             if isdynamic == False:
                 content = requests.get(link.format(number=num),verify =False).content
             else: 
-                content = dynamic_web(link.format(number=num),verify =False)
+                content = dynamic_web(link.format(number=num))
 
             # Calculate new list length and compare with last list length
             length_link= len(product_links)
