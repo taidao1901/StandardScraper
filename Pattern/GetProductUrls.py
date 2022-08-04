@@ -37,6 +37,7 @@ def Dynamic_web(link,parent_btn_class='',btn_class=''):
                     if more_button:
                         driver.execute_script("arguments[0].click();", more_button)
                 except:
+                    print('Không tìm thấy nút xem thêm. Kiểm tra lại scroll_btn_type')
                     pass
 
             # Wait to load page
