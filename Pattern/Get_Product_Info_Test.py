@@ -96,7 +96,7 @@ def get_product_info_test(html_soure,productlink,config):
     price_class = price['original_price_class']
     is_woocommerce = price['is_woocommerce']
     woocommerce_value = price['woocommerce_value']
-    if is_woocommerce=='0':
+    if is_woocommerce== 0 :
         try:
             original_price = soup.find(price_tag, class_=price_class)
             print('Thẻ giá :',original_price)
