@@ -163,24 +163,24 @@ def get_product_info(productlink,config):
         pass
     
     # Get color
-    #try:
-    colors = sub_info['color']
-    color_selected_tag = colors['selected_tag']
-    color_value = colors['value']
-    color_get_text = colors['get_text']
-    color_attrs = colors['attrs']
-    colorlist = r.html.find(color_selected_tag)
-    color=[]
-    for i in colorlist:
-        if color_get_text ==1:
-            color.append(i.text)
-        else:
-            color.append(i.attrs[color_attrs])
-    print('hahaha',color)
+    try:
+        colors = sub_info['color']
+        color_selected_tag = colors['selected_tag']
+        color_value = colors['value']
+        color_get_text = colors['get_text']
+        color_attrs = colors['attrs']
+        colorlist = r.html.find(color_selected_tag)
+        color=[]
+        for i in colorlist:
+            if color_get_text ==1:
+                color.append(i.text)
+            else:
+                color.append(i.attrs[color_attrs])
+    
         
-    #except:
-    #    color=''
-     #   pass
+    except:
+        color=''
+        pass
     
     # Get description_1
     try:
