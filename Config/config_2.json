@@ -3,6 +3,8 @@
     "shop_name": "xipi",
     "stylebox_shop_id": "21",
     "shop_url": "https://xipi.vn/",
+    "csvfilename":"test.csv",
+    "jsonfilename":"test.json",
     "isdynamic": 0,
 
     "product_links": {
