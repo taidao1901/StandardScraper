@@ -1,0 +1,82 @@
+{
+    
+    "shop_name": "xipi",
+    "stylebox_shop_id": "21",
+    "shop_url": "https://xipi.vn/",
+    "isdynamic": 0,
+
+    "product_links": {
+
+        "links": "https://xipi.vn/vay-dep.html,https://xipi.vn/dam-dep.html,https://xipi.vn/ao-dep.html,https://xipi.vn/quan-dep.html",
+
+        "same_string": "",
+
+        "product_block":{
+            "parent_atag_tag": "h5",
+            "parent_atag_class":"product-name",
+            "atag_class":""
+        },
+        "webtype":"scroll",
+
+        "scroll_btn_type":{
+            "parent_btn_class": "buttons",
+            "btn_class":"btn-show-more"
+        }
+
+    },
+
+
+    "main_info": {
+                "product_name": {
+                        "selected_tag": "h1.title"
+                },
+                "original_price": {
+                        "selected_tag": "span.woocommerce-Price-amount.amount bdi",
+                        "value": 0
+                },
+                "imgs": {
+                        "selected_tag": "div.s-img",
+                        "attrs": "data-bg"
+                }
+        },
+        "sub_info": {
+                "discounted_price": {
+                        "selected_tag": "span.woocommerce-Price-amount.amount bdi",
+                        "value": 1
+                },
+                "review": {
+                        "selected_tag": "",
+                        "value": null,
+                        "attrs": ""
+                },
+                "size": {
+                        "selected_tag": "li.variable-item.button-variable-item",
+                        "value": 0,
+                        "get_text": 0,
+                        "attrs": "title"
+                },
+                "color": {
+                        "selected_tag": "div.color",
+                        "value": null,
+                        "get_text": 0,
+                        "attrs": "data-value"
+                },
+                "description_1": {
+                        "selected_tag": "div.short-description",
+                        "get_text": 1,
+                        "attrs": ""
+                },
+                "description_2": {
+                        "selected_tag": "",
+                        "get_text": null,
+                        "attrs": ""
+                },
+                "rating": {
+                        "selected_tag": "",
+                        "value": null,
+                        "get_text": null,
+                        "attrs": ""
+                }
+        }
+    
+}
