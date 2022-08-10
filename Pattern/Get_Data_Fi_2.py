@@ -121,9 +121,6 @@ def get_product_info(productlink,config):
     
     # Get product img links
     try:
-        price = main_info['original_price']
-        price_selected_tag = price['selected_tag']
-        price_value = price['value']
         img = main_info['imgs']
         img_selected_tag = img['selected_tag']
         img_attrs = img['attrs']
