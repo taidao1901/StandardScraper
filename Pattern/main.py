@@ -25,14 +25,15 @@ if __name__ == '__main__':
             try:
                 config = json.load(cf)
             except:
-                print('Lỗi định dạng file config. Copy lại file mẫu rồi sửa lại<')
+                print('Lỗi định dạng file config. Copy lại file mẫu rồi sửa lại.')
                 exit()
         result_folder_name = config['stylebox_shop_id'] +'_'+config['shop_name']
         #Get link products
         print('Bắt đầu lấy link sản phẩm ....')
-        start = time.time()
+        #start = time.time()
         try: 
             product_links= get_product_urls(config)
+            print('Đã lấy link sản phẩm xong .')
             try:
                 if "debug_links" in sys.argv:
                     print('Tổng số sản phẩm lấy được link là:', len(product_links))
@@ -55,7 +56,6 @@ if __name__ == '__main__':
                 if os.path.exists(os.path.join(result_path, result_folder_name))==False:
                     os.mkdir(os.path.join(result_path, result_folder_name))
                 data = web_scraping(config, product_links, os.path.join(result_path, result_folder_name))
-                print('Đã lấy link sản phẩm xong .')
             #print('Thời gian lấy link sản phẩm: ', time.time()-start)
             exit()
         except Exception:
