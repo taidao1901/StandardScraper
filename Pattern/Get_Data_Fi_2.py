@@ -106,7 +106,6 @@ def get_product_info(productlink,config):
         name_selected_tag = name['selected_tag']
         product_name= r.html.find(name_selected_tag)[0].text.strip()
     except:
-        print()
         product_name=''
         pass
     
@@ -175,12 +174,11 @@ def get_product_info(productlink,config):
             if color_get_text ==1:
                 color.append(i.text)
             else:
-                color.append(i.attrs[color_attrs])
-    
-        
+                color.append(i.attrs[color_attrs])    
     except:
         color=''
         pass
+    
     
     # Get description_1
     try:
@@ -281,7 +279,7 @@ def get_product_data(productlink,config):
 
 # Hàm này để lấy data từ nhiều sản phẩm.
 
-def web_scraping(config,productlinks):
+def web_scraping(config,productlinks, path_file):
     
     print('Số sản phẩm khai thác được: ',len(productlinks))
     
@@ -294,9 +292,20 @@ def web_scraping(config,productlinks):
         count+=1
         m=get_product_data(i,config)
         data.append(m)
-    
-    csvfilename = config['csvfilename']
-    jsonfilename = config['jsonfilename']
+    try:
+        if csvfilename!=None and jsonfilename!=None
+            csvfilename = config['csvfilename']
+            jsonfilename = config['jsonfilename']
+        else:
+            day = datetime.today().strftime('%Y-%m-%d')
+            csvname = "x. SHOP_ID_"+config['stylebox_shop_id']+"_"+day+".csv"
+            jsonname= "x. SHOP_ID_"+config['stylebox_shop_id']+"_"+day+".json"
+            csvfilename = os.path.join(path_file,csvname)
+            jsonfilename = os.path.join(path_file,jsonname)
+    except:
+        print("Tên file xuất ra bị sai, chương trình sẽ tự động suất ra kết quả là file result.csv và result.json.")
+        csvfilename = "result.csv"
+        jsonfilename = "result.json"
     export_csv_and_json(csvfilename, jsonfilename, data)
     print('Oki we done :))')
     return ''
