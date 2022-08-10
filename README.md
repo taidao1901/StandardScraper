@@ -60,7 +60,7 @@ Step 2 : fill in parameters follow guide bellow.
    
   ```
  
-![alt text](http://url/to/img.png](https://github.com/taidao1901/StandardScraper/blob/99bf1dd952cb880e03ff6586c303a18927d9691a/imgs/Capture.PNG) 
+![alt text](https://github.com/taidao1901/StandardScraper/blob/99bf1dd952cb880e03ff6586c303a18927d9691a/imgs/Capture.PNG) 
 
 
     
