@@ -1,0 +1,84 @@
+{
+    
+    "shop_name": "Gemclothing",
+    "stylebox_shop_id": "21",
+    "shop_url": "https://gemclothing.vn/san-pham/",
+    "csvfilename":"test.csv",
+    "jsonfilename":"test.json",
+    "isdynamic": 0,
+
+    "product_links": {
+
+        "links": "https://gemclothing.vn/san-pham/page/{number}/",
+
+        "same_string": "",
+
+        "product_block":{
+            "parent_atag_tag": "div",
+            "parent_atag_class":"item",
+            "atag_class":""
+        },
+        "webtype":"normal",
+
+        "scroll_btn_type":{
+            "parent_btn_class": "",
+            "btn_class":""
+        }
+
+    },
+
+
+    "main_info": {
+                "product_name": {
+                        "selected_tag": "h1.title"
+                },
+                "original_price": {
+                        "selected_tag": "span.woocommerce-Price-amount.amount bdi",
+                        "value": 0
+                },
+                "imgs": {
+                        "selected_tag": "div.s-img",
+                        "attrs": "data-bg"
+                }
+        },
+        "sub_info": {
+                "discounted_price": {
+                        "selected_tag": "span.woocommerce-Price-amount.amount bdi",
+                        "value": 1
+                },
+                "review": {
+                        "selected_tag": "",
+                        "value": null,
+                        "attrs": ""
+                },
+                "size": {
+                        "selected_tag": "ul[aria-label=Size] li.variable-item.button-variable-item",
+                        "value": 0,
+                        "get_text": 0,
+                        "attrs": "title"
+                },
+                "color": {
+                        "selected_tag": "ul[aria-label=Color] li.variable-item.button-variable-item",
+                        "value": 0,
+                        "get_text": 0,
+                        "attrs": "title"
+                },
+                "description_1": {
+                        "selected_tag": "div.in-stock",
+                        "get_text": 1,
+                        "attrs": ""
+                },
+                "description_2": {
+                        "selected_tag": "div.in-stock",
+                        "get_text": 1,
+                        "attrs": ""
+                },
+                "rating": {
+                        "selected_tag": "",
+                        "value": null,
+                        "get_text": null,
+                        "attrs": ""
+                }
+        }
+    
+}
