@@ -1,78 +1,68 @@
-# Standard Version
+# Standard Version 
+# User Guide
 
-## Setup Enviroment
+
+## Setup workspace
 ```
-# using pip
+Step 1 : Dowload and install VScode via this link :
+https://code.visualstudio.com/download
+
+step 2 : create a folder and let it be your workspace folder.
+
+Step 2 : dowload code from this link :
+
+Step 3 : unzip it and put to your workspace folder.
+
+Step 4 : run VScode and open your workspace folder.
+
+Step 5 : in VScode, you press Ctrl+shift+x to open extensions window.
+
+Step 6 : search "python" in search bar .
+
+Step 7 : install the first one.
+
+Step 8 : search "Jupyter" , "Excel Viewer" and repeat step 7 respectively. 
+
+step 9 : press Ctrl+ `  to open VScode Terminal and run this code :
 pip install -r requirements.txt
 
-# using Conda
-conda create --name <env_name> --file requirements.txt
 ```
-## Hướng dẫn sử dụng.
-### Lấy link các sản phẩm có trong website.
-  1. Xác định web thuộc dạng có số trang ('normal') hay dạng cuộn ('scroll') : Chỉnh tham số webtype
+## Get all product informations progress
+```
+step 1 :  fill primary infomations
+
+Step 2 : find all product links.
+
+Step 3 : find product infomations
+
+Step 4 :  export data to csv and json file.
+
+```
+
+## Work with config.json file
+```
+Step 1 : copy file config.json to config folder and make sure just only this file in config folder.
+
+Step 2 : fill in parameters follow guide bellow.
+```
+  1. Primary infomations.
+```
+ Shop_name, stylebox_shop_id, shop_url can filled base on infomation from '0. Online_shop_link' file.
+ isdynamic : default value is 0, if use didn't get any infomations after run tool, change it to 1 and try again.
+```
+
+  2. Get all product links.
   ```
-    # web thuộc dạng có số trang
-    webtype= 'normal' 
-    # web thuộc thạng cuộn
-    webtype= 'scroll'
+   
+   In product_links part  :
+   links : link of page which include all product and . If you can't find all product page, you can get a group of link that you thought can get all product. 
+   ex :
+   
   ```
-  2. Xác định website dạng bình thường (False) hay động (True): Chỉnh tham số dynamic
-  ```
-      # website dạng bình thường
-      dynamic= False
-      # website dạng động
-      dynammic = True
-  ```
-  3. Xác định (các) link trên website cần thu thập: Chỉnh tham số links
-  ```
-      # Đối với  web dạng có số trang
-      links = ['https://hades.vn/collections/top?page={number}','https://hades.vn/collections/bottoms?page={number}']
-      # Đối với web dạng cuộn
-      links = ['https://ssstutter.com/c/for-him','https://ssstutter.com/c/for-her']
-      
-  ```
-  4. Xác định tên các class cần thiết.
-    * Ví dụ: 
-    ```
-    
-    ```
-    
-### Các bước thao tác với file Get_Data.py .
   
-  1. Quy ước
-    
-    
-    - Tên_biến : các tên dùng để lưu trữ một giá trị như : name để lưu trữ tên, price để lưu trữ giá tiền 
-    - Tên_thẻ : tên các thẻ trong html như div, span, h1, img ...
-    - Tên_class : tên các class được đặt trong thẻ 
-    **Chú ý :** 
-    - Khi lấy class ưu tiên chọn những tên có ý nghĩa khi dịch ra tiếng Việt như : product, item ...
-    - Tránh lấy các class có tên vô nghĩa, hoặc thuộc về định dạng như : slick-slide, container, col-6, col-md-4, col-lg-3 ...
-    
-  2. Các cú pháp thường dùng khi sửa file  :
-    
-    
-    
-    **Lấy các thẻ**
-    - Lấy một thẻ :
-      > Tên_biến = soup.find('Tên_thẻ', class_="Tên_class")
-    - Lấy nhiều thẻ :
-      > Tên_biến = soup.find_all('Tên_thẻ', class_="Tên_class")
-    
- 
-   
-    
-     ** Lấy thuộc tính của thẻ**
-    - Lấy một thuộc tính nào đó ( cái này tùy trường hợp có thể lấy được hoặc không)
-    - Lấy từng phần tử trong một biến chứa danh sách thẻ :
-      for i in Tên_biến :
-          Câu lệnh muốn dùng để sử lý các thẻ có trong danh sách thẻ.
-    - Lấy một thẻ trong nhiều thẻ
-   
-   
-  3. Các chỗ cần sửa
-    
+  3.
+
+
     
    
     
