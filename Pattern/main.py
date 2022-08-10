@@ -1,4 +1,4 @@
-from Get_Product_Info_Test import Test_Data
+#from Get_Product_Info_Test import Test_Data
 from GetProductUrls import get_product_urls
 from Get_Data_Fi_2 import web_scraping
 import csv
