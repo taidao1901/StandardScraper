@@ -286,26 +286,24 @@ def web_scraping(config,productlinks, path_file):
     data=[]
     data.append(['shop_name','stylebox_shop_id','shop_url','product_url','product_name','original_price','imgs','scrape_date','discounted_price','review','size','color','description_1','description_2','rating'])
     
-    count=1
+    #count=1
+    Print('Bắt đầu lấy thông tin tất cả sản phẩm :'
     for i in productlinks:
-        #print(count,' : ',i)
-        count+=1
+        print(count,' : ',i)
+        #count+=1
         m=get_product_data(i,config)
         data.append(m)
+        
     try:
-        if csvfilename!=None and jsonfilename!=None
-            csvfilename = config['csvfilename']
-            jsonfilename = config['jsonfilename']
-        else:
-            day = datetime.today().strftime('%Y-%m-%d')
-            csvname = "x. SHOP_ID_"+config['stylebox_shop_id']+"_"+day+".csv"
-            jsonname= "x. SHOP_ID_"+config['stylebox_shop_id']+"_"+day+".json"
-            csvfilename = os.path.join(path_file,csvname)
-            jsonfilename = os.path.join(path_file,jsonname)
+        day = datetime.today().strftime('%Y-%m-%d')
+        csvname = "x. SHOP_ID_"+config['stylebox_shop_id']+"_"+day+".csv"
+        jsonname= "x. SHOP_ID_"+config['stylebox_shop_id']+"_"+day+".json"
+        csvfilename = os.path.join(path_file,csvname)
+        jsonfilename = os.path.join(path_file,jsonname)
     except:
         print("Tên file xuất ra bị sai, chương trình sẽ tự động suất ra kết quả là file result.csv và result.json.")
-        csvfilename = "result.csv"
-        jsonfilename = "result.json"
+        csvfilename = os.path.join(path_file,"result.csv")
+        jsonfilename = os.path.join(path_file,"result.json")
     export_csv_and_json(csvfilename, jsonfilename, data)
     print('Oki we done :))')
     return ''
