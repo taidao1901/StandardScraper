@@ -9,21 +9,21 @@ https://code.visualstudio.com/download
 
 step 2 : create a folder and let it be your workspace folder.
 
-Step 2 : dowload code from this link :
+Step 3 : dowload code from this link :
 
-Step 3 : unzip it and put to your workspace folder.
+Step 4 : unzip it and put to your workspace folder.
 
-Step 4 : run VScode and open your workspace folder.
+Step 5 : run VScode and open your workspace folder.
 
-Step 5 : in VScode, you press Ctrl+shift+x to open extensions window.
+Step 6 : in VScode, you press Ctrl+shift+x to open extensions window.
 
-Step 6 : search "python" in search bar .
+Step 7 : search "python" in search bar .
 
-Step 7 : install the first one.
+Step 8 : install the first one.
 
-Step 8 : search "Jupyter" , "Excel Viewer" and repeat step 7 respectively. 
+Step 9 : search "Jupyter" , "Excel Viewer" and repeat step 8 respectively. 
 
-step 9 : press Ctrl+ `  to open VScode Terminal and run this code :
+step 10 : press Ctrl+ `  to open VScode Terminal and run this code :
 pip install -r requirements.txt
 
 ```
