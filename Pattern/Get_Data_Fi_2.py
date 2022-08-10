@@ -287,7 +287,7 @@ def web_scraping(config,productlinks, path_file):
     data.append(['shop_name','stylebox_shop_id','shop_url','product_url','product_name','original_price','imgs','scrape_date','discounted_price','review','size','color','description_1','description_2','rating'])
     
     #count=1
-    Print('Bắt đầu lấy thông tin tất cả sản phẩm :'
+    Print('Bắt đầu lấy thông tin tất cả sản phẩm :')
     for i in productlinks:
         print(count,' : ',i)
         #count+=1
