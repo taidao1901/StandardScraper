@@ -62,7 +62,7 @@ Step 4 : Change the number of page to this syntax : {number}  and fill to "links
 ```
 ![alt text](https://github.com/taidao1901/StandardScraper/blob/73314980b180a69c6606260025b80a557292b110/imgs/Screenshot%20(272).png) 
 ```
-Step 5 : return to website, press F12 to see html code. Choose the tag has link product.
+Step 5 : return to website, press F12 to see html code. Choose the tag has link product. Press Ctrl+Shift+c to see exactly html souce code of anywhere your mouse point. It will help you a lot.
 ```
 ![alt text](https://github.com/taidao1901/StandardScraper/blob/a3dfca6a9a5e498edf39caf5f9afb3769a98b4c6/imgs/Screenshot%20(274).png) 
 ```
@@ -82,31 +82,69 @@ Notice : if scrolling page have button to show more product, we have to fill cla
 ```
 Step 1 : open a random product link.
 Step 2 : press F12 to see html source code.
-Step 3 :
+```
+![alt text](https://github.com/taidao1901/StandardScraper/blob/fc81965a5cfdc3ac1b964785b8dc37eb9b106435/imgs/Screenshot%20(280).png) 
+```
+Step 3 : Find the tag contains product name. Pressing Ctrl+Shift+c will help you again.
+```
+![alt text](https://github.com/taidao1901/StandardScraper/blob/0a47da1efbc1727b3647bb99899a65099c38cb76/imgs/Screenshot%20(281).png) 
+```
+Step 4 : comback to config.json file and fill parameter on product_name part. To do this step, you have to see rule of synstax bellow.
+Step 5 : repeate step 4 with all part remaining on "main_info" and "sub_info" part .
+```
+![alt text](https://github.com/taidao1901/StandardScraper/blob/f9d2b152c30836dda830d3451d5e94aaad942fdf/imgs/Screenshot%20(282).png) 
+
+#### Very impotant
+```
+Explain four primary parameter on "main_info" and "sub_info" part :
+
+selected_tag :  tags you want to choose. You can config this parameter follow Get-info syntax explained bellow.
+
+value : if selected_tag have many tags and you want to choose one of them, you can config this as ordinal number start from 0. 
+if you want to get all tag from selected_tag, you have to set it is "null".
+
+get_text : if you want to get tag content, set get_text is 1. Otherwise, it has to set 0.
+
+attrs : if the thing you want to get is value of something attribute, you can set get_text is 0 and fill attribute name to this parameter.     
 ```
 
-## Work with config.json file
 ```
-Step 1 : copy file config.json to config folder and make sure just only this file in config folder.
+Get-info syntax :
 
-Step 2 : fill in parameters follow guide bellow.
+Class :  .
+Ex :  .price  -> class "price" ,   .item   -> class "item"
+
+ID :  #
+Ex :  #price  ->  ID is "price"  ,    #item   -> ID is "item"
+
+Other Attribute : [attribute_name=attribute_value]
+Ex :  [aria-label=Size]  -> "aria-label" attribute has value is "Size",
+      [data-attribute_name=attribute_pa_size]  ->  "data-attribute_name" attribute has value is "attribute_pa_size"
+      
+Choose a tag : tag_name+Class/ID/Attibute 
+Ex :   div.price    -> get tag div has class "price",
+       span#price   -> get tag span has ID is "price",
+       span[data-value=m]   ->   get tag span has attribute "data-value" is "m",
+       div.price#item ->  get tag div has class "price" and ID is "item"
+       span.price[data-value=color-red] -> 
+
+If you can't filter out tags you want, you can get it from their parent tag. 
+Parent tag is the tag that contain the tag you want to choose. Follow this syntax :  parent_tag chosen_tag
+Ex : div.price#item span   ->  get tag span from their parent is tag div.price#item,
+     span[data-value=m] div.price -> get tag div.price from their parent is tag span[data-value=m]
 ```
-  1. Primary infomations.
 ```
- Shop_name, stylebox_shop_id, shop_url can filled base on infomation from '0. Online_shop_link' file.
- isdynamic : default value is 0, if use didn't get any infomations after run tool, change it to 1 and try again.
+After done, "main_info" and "sub_info" part may like 
+```
+![alt text](https://github.com/taidao1901/StandardScraper/blob/1ce10a18daa69459894f1bdc5af8e2d29b75f54d/imgs/Screenshot%20(285).png) 
+![alt text](https://github.com/taidao1901/StandardScraper/blob/1ce10a18daa69459894f1bdc5af8e2d29b75f54d/imgs/Screenshot%20(286).png) 
+
+#### Notice
+```
+BE CAREFULL WITH SPACE WHEN YOU CONFIG.
 ```
 
-  2. Get all product links.
-  ```
-   
-   In product_links part  :
-   links : link of page which include all product and . If you can't find all product page, you can get a group of link that you thought can get all product. 
-   ex :
-   
-  ```
- 
-![alt text](https://github.com/taidao1901/StandardScraper/blob/fabd67892744a08eb5533b94d133492e75de37cf/imgs/Screenshot%20(279).png) 
+![alt text](https://github.com/taidao1901/StandardScraper/blob/1ce10a18daa69459894f1bdc5af8e2d29b75f54d/imgs/Screenshot%20(286).png) 
 
 
     
