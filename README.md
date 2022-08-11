@@ -74,7 +74,7 @@ Step 7 : fill "webtype" is "scroll" if page is scrolling page type. Otherwise, w
 ```
 ![alt text](https://github.com/taidao1901/StandardScraper/blob/46d6241364bee68faaee6390f4c653e33176ad32/imgs/Screenshot%20(278).png) 
 ```
-Notice : if scrolling page have button to show more product, we have to fill class of button and class of its parent tag to "scroll_btn_type" part. For example :
+Notice : if scrolling page have button to show more product, we have to fill class of button and class of its parent tag to "scroll_btn_type" part. Image bellow is example.
 ```
 ![alt text](https://github.com/taidao1901/StandardScraper/blob/fabd67892744a08eb5533b94d133492e75de37cf/imgs/Screenshot%20(279).png) 
 
