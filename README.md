@@ -35,18 +35,45 @@ step 10 : press Ctrl+ `  to open VScode Terminal and run this code :
 pip install -r requirements.txt
 ```
 ![alt text](https://github.com/taidao1901/StandardScraper/blob/8cf22bc4f17dfcaa642c3796734e3ea46d58784f/imgs/Screenshot%20(265).png) 
-
-## Get all product informations progress
+## Get all product informations progress sumary
 ```
-step 1 :  fill primary infomations
+Step 1 : get all products links
+Step 2 : get main infomations and sub informations of all products.
+Step 3 : check gained data.
+Step 4 : export data to json and csv file.
+```
 
-Step 2 : find all product links.
-
-Step 3 : find product infomations
-
-Step 4 :  export data to csv and json file.
+### Get all product links
+```
+Step 1 : Open config folder, after that open config.json file.
+```
+![alt text](https://github.com/taidao1901/StandardScraper/blob/388b2b438bc3583d650de603fe809fb8a7d947d3/imgs/Screenshot%20(268).png) 
 
 ```
+Step 2 : fill primary informations of shop : shop_name, stylebox_shop_id, shop_url. isdynamic parameter will be set 0 as default.
+```
+![alt text](https://github.com/taidao1901/StandardScraper/blob/136c79339c38acda03db0f332e30a691e8b38c51/imgs/Screenshot%20(269).png) 
+```
+Step 3 : Open shop's website and find page that include all products or group of link can get all products. if link has many product page, we have to change to page 2,3, etc... to see number of page on link. 
+```
+![alt text](https://github.com/taidao1901/StandardScraper/blob/9d339d9ab605aefb3d30386fcdf2dc3dc2af70b9/imgs/Screenshot%20(271).png) 
+```
+Step 4 : Change the number of page to this syntax : {number}  and fill to "links" paremeter on "product_links" part.
+```
+![alt text](https://github.com/taidao1901/StandardScraper/blob/73314980b180a69c6606260025b80a557292b110/imgs/Screenshot%20(272).png) 
+```
+Step 5 : return to website, press F12 to see html code. Choose the tag has link product.
+```
+![alt text](https://github.com/taidao1901/StandardScraper/blob/a3dfca6a9a5e498edf39caf5f9afb3769a98b4c6/imgs/Screenshot%20(274).png) 
+```
+Step 6 : Fill parent tag information of selected tag to "product_block" part.
+```
+![alt text](https://github.com/taidao1901/StandardScraper/blob/20bb517473d76ff61c126c03a5e6ff62ead3ab8b/imgs/Screenshot%20(275).png) 
+```
+Step 7 : fill "webtype" is "scroll" if page is scrolling page type. Otherwise, we will set "normal" as default. 
+```
+![alt text](https://github.com/taidao1901/StandardScraper/blob/46d6241364bee68faaee6390f4c653e33176ad32/imgs/Screenshot%20(278).png) 
+
 
 ## Work with config.json file
 ```
@@ -69,7 +96,7 @@ Step 2 : fill in parameters follow guide bellow.
    
   ```
  
-![alt text](https://github.com/taidao1901/StandardScraper/blob/8cf22bc4f17dfcaa642c3796734e3ea46d58784f/imgs/Screenshot%20(265).png) 
+![alt text](https://github.com/taidao1901/StandardScraper/blob/46d6241364bee68faaee6390f4c653e33176ad32/imgs/Screenshot%20(278).png) 
 
 
     
