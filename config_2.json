@@ -1,10 +1,8 @@
 {
     
-    "shop_name": "Gemclothing",
-    "stylebox_shop_id": "21",
-    "shop_url": "https://gemclothing.vn/san-pham/",
-    "csvfilename":"test.csv",
-    "jsonfilename":"test.json",
+    "shop_name": "Gem Clothing",
+    "stylebox_shop_id": "25",
+    "shop_url": "https://gemclothing.vn/",
     "isdynamic": 0,
 
     "product_links": {
@@ -29,54 +27,69 @@
 
 
     "main_info": {
+        
                 "product_name": {
-                        "selected_tag": "h1.title"
+                        "selected_tag": "h1.title",
+                        "value": 0,
+                        "get_text": 1,
+                        "attrs": ""
+
                 },
                 "original_price": {
                         "selected_tag": "span.woocommerce-Price-amount.amount bdi",
-                        "value": 0
+                        "value": 0,
+                        "get_text": 1,
+                        "attrs": ""
                 },
                 "imgs": {
                         "selected_tag": "div.s-img",
+                        "value": null,
+                        "get_text": 0,
                         "attrs": "data-bg"
                 }
         },
         "sub_info": {
                 "discounted_price": {
                         "selected_tag": "span.woocommerce-Price-amount.amount bdi",
-                        "value": 1
+                        "value": 1,
+                        "get_text": 1,
+                        "attrs": ""
+
+                },
+                "color": {
+                        "selected_tag": "ul[aria-label=Color]",
+                        "value": null,
+                        "get_text": 0,
+                        "attrs": "data-attribute_values"
+                },
+                "size": {
+                        "selected_tag": "ul[aria-label=Size] li.variable-item",
+                        "value": null,
+                        "get_text": 0,
+                        "attrs": "data-value"
                 },
                 "review": {
                         "selected_tag": "",
                         "value": null,
+                        "get_text": 0,
                         "attrs": ""
-                },
-                "size": {
-                        "selected_tag": "ul[aria-label=Size] li.variable-item.button-variable-item",
-                        "value": 0,
-                        "get_text": 0,
-                        "attrs": "title"
-                },
-                "color": {
-                        "selected_tag": "ul[aria-label=Color] li.variable-item.button-variable-item",
-                        "value": 0,
-                        "get_text": 0,
-                        "attrs": "title"
                 },
                 "description_1": {
                         "selected_tag": "div.in-stock",
+                        "value": null,
                         "get_text": 1,
                         "attrs": ""
                 },
                 "description_2": {
                         "selected_tag": "div.in-stock",
+                        "value": null,
                         "get_text": 1,
                         "attrs": ""
                 },
                 "rating": {
                         "selected_tag": "",
                         "value": null,
-                        "get_text": null,
+                        "get_text": 0,
                         "attrs": ""
                 }
         }
