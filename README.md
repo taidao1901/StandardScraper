@@ -73,7 +73,17 @@ Step 6 : Fill parent tag information of selected tag to "product_block" part.
 Step 7 : fill "webtype" is "scroll" if page is scrolling page type. Otherwise, we will set "normal" as default. 
 ```
 ![alt text](https://github.com/taidao1901/StandardScraper/blob/46d6241364bee68faaee6390f4c653e33176ad32/imgs/Screenshot%20(278).png) 
+```
+Notice : if scrolling page have button to show more product, we have to fill class of button and class of its parent tag to "scroll_btn_type" part. For example :
+```
+![alt text](https://github.com/taidao1901/StandardScraper/blob/fabd67892744a08eb5533b94d133492e75de37cf/imgs/Screenshot%20(279).png) 
 
+### Get main infomations and sub informations of all products.
+```
+Step 1 : open a random product link.
+Step 2 : press F12 to see html source code.
+Step 3 :
+```
 
 ## Work with config.json file
 ```
@@ -96,7 +106,7 @@ Step 2 : fill in parameters follow guide bellow.
    
   ```
  
-![alt text](https://github.com/taidao1901/StandardScraper/blob/46d6241364bee68faaee6390f4c653e33176ad32/imgs/Screenshot%20(278).png) 
+![alt text](https://github.com/taidao1901/StandardScraper/blob/fabd67892744a08eb5533b94d133492e75de37cf/imgs/Screenshot%20(279).png) 
 
 
     
