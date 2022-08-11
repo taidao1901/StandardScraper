@@ -4,65 +4,66 @@
 
 ## Setup workspace
 ```
-Step 1 : Dowload and install VScode via this link :
+Step 1: Download and install VScode via this link :
 https://code.visualstudio.com/download
 
-step 2 : create a folder and let it be your workspace folder.
+step 2: create a folder and let it be your workspace folder.
 
-Step 3 : dowload code from this link :
+Step 3: Download the code from this link :
+< company git link >
 
-Step 4 : unzip it and put to your workspace folder.
+Step 4: unzip it and put it in your workspace folder.
 
-Step 5 : run VScode and open your workspace folder.
+Step 5: run VScode and open your workspace folder.
 ```
 ![alt text](https://github.com/taidao1901/StandardScraper/blob/77e9b258a457045474ea701e65a6a1f34a8056fe/imgs/Screenshot%20(260).png) 
 ```
-Step 6 : in VScode, you press Ctrl+shift+x to open extensions window.
+Step 6: in VScode, you press Ctrl+shift+x to open the extensions window.
 
-Step 7 : search "python" in search bar .
+Step 7: search "python" in the search bar.
 
-Step 8 : install the first one.
+Step 8: Install the first one.
 ```
 ![alt text](https://github.com/taidao1901/StandardScraper/blob/099c5d7740c2d0715febe34d49686ae6fc9ea5e5/imgs/Screenshot%20(262).png) 
 ```
-Step 9 : search "Jupyter" , "Excel Viewer" and repeat step 8 respectively. 
+Step 9: search "Jupyter", and "Excel Viewer" and repeat step 8 respectively. 
 ```
 ![alt text](https://github.com/taidao1901/StandardScraper/blob/83a930c579d642c3b81b57eb7125af523958768a/imgs/Screenshot%20(264).png) 
 
 ![alt text](https://github.com/taidao1901/StandardScraper/blob/a5ab3b8dc495223bc1e68e4de34d99f6f23e458c/imgs/Screenshot%20(263).png) 
 ```
-step 10 : press Ctrl+ `  to open VScode Terminal and run this code :
+step 10: press Ctrl+ `  to open VScode Terminal and run this code :
 pip install -r requirements.txt
 ```
 ![alt text](https://github.com/taidao1901/StandardScraper/blob/8cf22bc4f17dfcaa642c3796734e3ea46d58784f/imgs/Screenshot%20(265).png) 
-## Get all product informations progress sumary
+## Get all product information progress summary
 ```
-Step 1 : get all products links
-Step 2 : get main infomations and sub informations of all products.
-Step 3 : check gained data.
-Step 4 : export data to json and csv file.
+Step 1: config to get all product links.
+Step 2: config gets main information and sub information of all products.
+Step 3: Check the config.json file after config.
+Step 4: Run tool and export data to JSON and CSV files.
 ```
 
 ### Get all product links
 ```
-Step 1 : Open config folder, after that open config.json file.
+Step 1: Open the config folder, after that open the config.json file.
 ```
 ![alt text](https://github.com/taidao1901/StandardScraper/blob/388b2b438bc3583d650de603fe809fb8a7d947d3/imgs/Screenshot%20(268).png) 
 
 ```
-Step 2 : fill primary informations of shop : shop_name, stylebox_shop_id, shop_url. isdynamic parameter will be set 0 as default.
+Step 2 : fill primary informations of shop : shop_name, stylebox_shop_id, shop_url. isdynamic parameter will be set to 0 as default.
 ```
 ![alt text](https://github.com/taidao1901/StandardScraper/blob/136c79339c38acda03db0f332e30a691e8b38c51/imgs/Screenshot%20(269).png) 
 ```
-Step 3 : Open shop's website and find page that include all products or group of link can get all products. if link has many product page, we have to change to page 2,3, etc... to see number of page on link. 
+Step 3: Open the shop's website and find the page that includes all products or a group of links that can get all products. if the link has many product pages, we have to change it to pages 2,3, etc... to see the number of the page on the link. 
 ```
 ![alt text](https://github.com/taidao1901/StandardScraper/blob/9d339d9ab605aefb3d30386fcdf2dc3dc2af70b9/imgs/Screenshot%20(271).png) 
 ```
-Step 4 : Change the number of page to this syntax : {number}  and fill to "links" paremeter on "product_links" part.
+Step 4: Change the number of pages to this syntax: {number}  and fill to "links" parameter on the "product_links" part.
 ```
 ![alt text](https://github.com/taidao1901/StandardScraper/blob/73314980b180a69c6606260025b80a557292b110/imgs/Screenshot%20(272).png) 
 ```
-Step 5 : return to website, press F12 to see html code. Choose the tag has link product. Press Ctrl+Shift+c to see exactly html souce code of anywhere your mouse point. It will help you a lot.
+Step 5: Return to website, press F12 to see html code. Choose the tag has link product. Press Ctrl+Shift+c to see exactly html souce code of anywhere your mouse point. It will help you a lot.
 ```
 ![alt text](https://github.com/taidao1901/StandardScraper/blob/a3dfca6a9a5e498edf39caf5f9afb3769a98b4c6/imgs/Screenshot%20(274).png) 
 ```
@@ -143,8 +144,37 @@ After done, "main_info" and "sub_info" part may like
 ```
 BE CAREFULL WITH SPACE WHEN YOU CONFIG.
 ```
+### Check config.json file after config
+```
+Step 1 : go to "Pattern" folder and double-click to "Get_Product_Info_Test.py" to open. After that, you right-click to the file name. Everything will show like this.
+```
+![alt text](https://github.com/taidao1901/StandardScraper/blob/5a58c789ee78792cae52e51a3db1167b937073f0/imgs/Screenshot%20(287).png) 
+```
+Step 2 : Click to "run current file in interactive window" option.
+```
+![alt text](https://github.com/taidao1901/StandardScraper/blob/609ac3c145ced0af54618a01e6733f1ae77c1a6b/imgs/Screenshot%20(288).png) 
+```
+Step 3 : input random product link to box on top of window.
+```
+![alt text](https://github.com/taidao1901/StandardScraper/blob/98140cbf2b2ed65ebcdd053c2a5d93ffa57fc83c/imgs/Screenshot%20(289).png) 
+```
+Step 4 : Now you can see selected_tag of each part, data gained, error of config file. I
+```
+![alt text](https://github.com/taidao1901/StandardScraper/blob/98140cbf2b2ed65ebcdd053c2a5d93ffa57fc83c/imgs/Screenshot%20(290).png) 
+![alt text](https://github.com/taidao1901/StandardScraper/blob/98140cbf2b2ed65ebcdd053c2a5d93ffa57fc83c/imgs/Screenshot%20(291).png) 
 
-![alt text](https://github.com/taidao1901/StandardScraper/blob/1ce10a18daa69459894f1bdc5af8e2d29b75f54d/imgs/Screenshot%20(286).png) 
+### Run tool and export data to json and csv file.
+```
+Step 1 : go to "Pattern" folder and double-click to "main.py" to open. After that, you right-click to the file name.
+Step 2 : Click to "run current file in interactive window" option and wait. You can have a cup of tea now. After done, it will like 
+```
+
+![alt text](https://github.com/taidao1901/StandardScraper/blob/26b2ad633dbb22781e7ee31c0fdeabbd34301de4/imgs/Screenshot%20(292).png) 
+```
+Step 3 : json and csv file had beeen created automative in result folder. You can check data by choose "open review" with csv file.
+```
+![alt text](https://github.com/taidao1901/StandardScraper/blob/26b2ad633dbb22781e7ee31c0fdeabbd34301de4/imgs/Screenshot%20(293).png) 
+![alt text](https://github.com/taidao1901/StandardScraper/blob/26b2ad633dbb22781e7ee31c0fdeabbd34301de4/imgs/Screenshot%20(294).png) 
 
 
     
