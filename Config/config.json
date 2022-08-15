@@ -1,0 +1,96 @@
+{
+    
+    "shop_name": "Bleubird",
+    "stylebox_shop_id": "95",
+    "shop_url": "https://bleubird.asia/",
+    "isdynamic": 0,
+
+    "product_links": {
+
+        "links": "https://bleubird.asia/collections/all?page={number}",
+
+        "same_string": "",
+
+        "product_block":{
+            "parent_atag_tag": "h3",
+            "parent_atag_class":"card__heading",
+            "atag_class":""
+        },
+        "webtype":"normal",
+
+        "scroll_btn_type":{
+            "parent_btn_class": "",
+            "btn_class":""
+        }
+
+    },
+
+
+    "main_info": {
+                "product_name": {
+                        "selected_tag": "h1.product__title",
+                        "value": 0,
+                        "get_text": 1,
+                        "attrs": ""
+
+                },
+                "original_price": {
+                        "selected_tag": "span.money",
+                        "value": 0,
+                        "get_text": 1,
+                        "attrs": ""
+                },
+                "imgs": {
+                        "selected_tag": "div.product__media img",
+                        "value": null,
+                        "get_text": 0,
+                        "attrs": "src"
+                }
+        },
+        "sub_info": {
+                "discounted_price": {
+                        "selected_tag": "span.money",
+                        "value": 1,
+                        "get_text": 1,
+                        "attrs": ""
+
+                },
+                "color": {
+                        "selected_tag": "input[name=option1]",
+                        "value": null,
+                        "get_text": 0,
+                        "attrs": "value"
+                },
+                "size": {
+                        "selected_tag": "input[name=Size]",
+                        "value": null,
+                        "get_text": 0,
+                        "attrs": "value"
+                },
+                "review": {
+                        "selected_tag": "",
+                        "value": null,
+                        "get_text": 0,
+                        "attrs": ""
+                },
+                "description_1": {
+                        "selected_tag": "div.product__description",
+                        "value": null,
+                        "get_text": 1,
+                        "attrs": ""
+                },
+                "description_2": {
+                        "selected_tag": "h2.h4.accordion__title",
+                        "value": null,
+                        "get_text": 1,
+                        "attrs": ""
+                },
+                "rating": {
+                        "selected_tag": "",
+                        "value": null,
+                        "get_text": 0,
+                        "attrs": ""
+                }
+        }
+    
+}
