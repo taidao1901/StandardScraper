@@ -72,8 +72,77 @@ def export_csv_and_json(csvfilename, jsonfilename, data):
 
 # In[6]:
 
+def get_tag_config(name,config):
+    tag = config[name]
+    tag_config = [tag['selected_tag'],tag['value'],tag['get_text'],tag['attrs']]
+    return tag_config
+def get_tag_info(r,tag_config):
+    selected_tag = tag_config[0]
+    value = tag_config[1]
+    get_text = tag_config[2]
+    attrs = tag_config[3]
+    info=[]
+    
+    try:
+        tag_list = r.html.find(selected_tag)
+    except:
+        tag_list =[]
+        pass
+    
+    try:    
+        if value!=None:
+            tag = [tag_list[value]]
+        else :
+            tag = tag_list
+    except:
+        tag=[]
+        pass
+    
+    try:
+        if get_text == 0:
+            for i in tag:
+                info.append(i.attrs[attrs])
+        else:
+            for j in tag:
+                info.append(j.text.strip())
+    except:
+        pass
+    unique_info = set(info)
+    result = list(unique_info)
+    return result
 
-# this function use to get one product info.
+# Get value of price
+def get_price(price):
+    pstr=''
+    try:
+        for i in price:
+            if i.isdigit() or i=='.':
+                pstr+=i
+    except:
+        pass
+    if pstr=='':
+        pstr='0'   
+    try:
+        p = float(pstr)
+    except:
+        pass
+    return p
+
+# Check original_price and discounted_price
+def check_price(original_price,discounted_price):
+    try:
+        o_p= get_price(original_price)
+        d_p= get_price(discounted_price)
+        if o_p<d_p:
+            kq=[discounted_price,original_price]
+        else:
+            kq=[original_price,discounted_price]
+    except:
+        kq=[original_price,discounted_price]
+        pass
+    return kq
+        
+# this function use to get one product info.  
 def get_product_info(productlink,config):
 
     # Use HTMLSession
@@ -102,38 +171,27 @@ def get_product_info(productlink,config):
     
     # Get name
     try:
-        name = main_info['product_name']
-        name_selected_tag = name['selected_tag']
-        product_name= r.html.find(name_selected_tag)[0].text.strip()
+        product_name_name='product_name'
+        product_name_config = get_tag_config(product_name_name,main_info)
+        product_name= get_tag_info(r,product_name_config)[0]
     except:
         product_name=''
         pass
     
     # Get original price
     try:
-        price = main_info['original_price']
-        price_selected_tag = price['selected_tag']
-        price_value = price['value']
-        original_price = r.html.find(price_selected_tag)[price_value].text.strip()
+        original_price_name='original_price'
+        original_price_config = get_tag_config(original_price_name,main_info)
+        original_price= (get_tag_info(r,original_price_config))[0]
     except:
         original_price=''
     
     
     # Get product img links
     try:
-        img = main_info['imgs']
-        img_selected_tag = img['selected_tag']
-        img_attrs = img['attrs']
-        img_tags = r.html.find(img_selected_tag)
-        link = []
-        for i in img_tags:
-            try:
-                link.append(i.attrs[img_attrs])
-            except:
-                pass
-
-        links = set(link)
-        imgs = list(links)
+        imgs_name='imgs'
+        imgs_config = get_tag_config(imgs_name,main_info)
+        imgs= get_tag_info(r,imgs_config)
     except:
         imgs =''
     
@@ -142,7 +200,9 @@ def get_product_info(productlink,config):
     
     # Get review
     try:
-        review= 4/0
+        review_name='review'
+        review_config = get_tag_config(review_name,sub_info)
+        review= get_tag_info(r,review_config)
     except:
         review=''
         pass
@@ -150,65 +210,36 @@ def get_product_info(productlink,config):
         
     # Get sale price
     try:
-        sale = sub_info['discounted_price']
-        sale_selected_tag = sale['selected_tag']
-        sale_value = sale['value']
-        discounted_price = r.html.find(sale_selected_tag)[sale_value].text.strip()
+        discounted_price_name='discounted_price'
+        discounted_price_config = get_tag_config(discounted_price_name,sub_info)
+        discounted_price= (get_tag_info(r,discounted_price_config))[0]
     except:
         discounted_price =''
         pass
     
     # Get color
     try:
-        colors = sub_info['color']
-        color_selected_tag = colors['selected_tag']
-        color_value = colors['value']
-        color_get_text = colors['get_text']
-        color_attrs = colors['attrs']
-        colorlist = r.html.find(color_selected_tag)
-        color=[]
-        for i in colorlist:
-            if color_get_text ==1:
-                color.append(i.text)
-            else:
-                color.append(i.attrs[color_attrs])    
+        color_name='color'
+        color_config = get_tag_config(color_name,sub_info)
+        color= get_tag_info(r,color_config) 
     except:
         color=''
         pass
     
-    
     # Get description_1
     try:
-        des1 = sub_info['description_1']
-        des1_selected_tag = des1['selected_tag']
-        des1_get_text = des1['get_text']
-        des1_attrs = des1['attrs']
-        description_1= []
-        content = r.html.find(des1_selected_tag)
-        for i in content:
-            if des1_get_text ==1:
-                description_1.append(i.text)
-            else:
-                description_1.append(i.attrs[des1_attrs])
-            #print(description_1)
+        description_1_name='description_1'
+        description_1_config = get_tag_config(description_1_name,sub_info)
+        description_1= get_tag_info(r,description_1_config)  
     except:
         description_1=''
         pass
     
     # Get description_2
     try:
-        des2 = sub_info['description_2']
-        des2_selected_tag = des2['selected_tag']
-        des2_get_text = des2['get_text']
-        des2_attrs = des2['attrs']
-        description_2= []
-        content = r.html.find(des2_selected_tag)
-        for i in content:
-            if des2_get_text ==1:
-                description_2.append(i.text)
-            else:
-                description_2.append(i.attrs[des2_attrs])
-            #print(description_1)
+        description_2_name='description_2'
+        description_2_config = get_tag_config(description_2_name,sub_info)
+        description_2= get_tag_info(r,description_2_config)  
     except:
         description_2=''
         pass
@@ -216,7 +247,9 @@ def get_product_info(productlink,config):
     
      # Get rating 
     try:
-        rating= 4/0
+        rating_name='rating'
+        rating_config = get_tag_config(rating_name,sub_info)
+        rating= get_tag_info(r,rating_config)
     
     except:
         rating =''
@@ -224,29 +257,23 @@ def get_product_info(productlink,config):
     
     # Get size
     try:
-        sizes = sub_info['size']
-        sizes_selected_tag = sizes['selected_tag']
-        sizes_get_text = sizes['get_text']
-        sizes_attrs = sizes['attrs']
-        
-        sizes_value = sizes['value']
-        si = r.html.find(sizes_selected_tag) 
-        size = []
-        for i in si:
-            try:
-                size.append(i.attrs[sizes_attrs])
-            except:
-                pass
-        k = set(size)
-        size = list(k)
-        #print(size)
+        size_name='size'
+        size_config = get_tag_config(size_name,sub_info)
+        size= get_tag_info(r,size_config) 
     
     except:
         size= ''
         pass
       
+    # Check price
+    price_checked = [original_price,discounted_price]
+    try:
+        price_checked = check_price(original_price,discounted_price)
+    except:
+        pass
+
     # List product data forlow data schema
-    product_data=[shop_name, stylebox_shop_id, shop_url, product_url, product_name, original_price, imgs, scrape_date, discounted_price, review, size, color, description_1, description_2, rating]   
+    product_data=[shop_name, stylebox_shop_id, shop_url, product_url, product_name, price_checked[0], imgs, scrape_date, price_checked[1], review, size, color, description_1, description_2, rating]   
     
     return product_data
         

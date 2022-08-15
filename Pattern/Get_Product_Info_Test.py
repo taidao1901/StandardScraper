@@ -1,10 +1,13 @@
-# %%
-from datetime import datetime
+#!/usr/bin/env python
+# coding: utf-8
 
+# In[1]:
+
+
+from datetime import datetime
 import requests
 from bs4 import BeautifulSoup
 from requests_html import HTMLSession
-
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
@@ -18,228 +21,219 @@ import time
 import os
 import urllib3
 
-# %%
+
+# In[2]:
+
+
+def get_tag_config_test(name,config):
+    tag = config[name]
+    tag_config = [tag['selected_tag'],tag['value'],tag['get_text'],tag['attrs']]
+    return tag_config
+
+def get_tag_info_test(r,name,tag_config):
+    selected_tag = tag_config[0]
+    value = tag_config[1]
+    get_text = tag_config[2]
+    attrs = tag_config[3]
+    info=[]
+    
+    print(name.upper())
+    try:
+        tag_list = r.html.find(selected_tag)
+        print('Thẻ đã chọn : ',tag_list[0])
+    except:
+        tag_list =[]
+        print('Không tìm được thẻ. Kiểm tra lại selected_tag của phần ',name,'.')
+        pass
+    
+    try:    
+        if value!=None:
+            tag = [tag_list[value]]
+        else :
+            tag = tag_list
+    except:
+        print('Giá trị không hợp lệ. Kiểm tra lại value của phần ',name,'.')
+        tag=[]
+        pass
+    
+    try:
+        if get_text == 0:
+            for i in tag:
+                try:
+                    info.append(i.attrs[attrs])
+                except:
+                    print('Không tìm được thuộc tính để lấy giá trị. Kiểm tra lại attrs của phần ',name,'.')
+                    pass
+        else:
+            for j in tag:
+                try:
+                    info.append(j.text.strip())
+                except:
+                    print('Không lấy được nội dung thẻ. Kiểm tra lại get_text của phần ',name,'.')
+                    pass
+    except:
+        pass
+    unique_info = set(info)
+    result = list(unique_info)
+    print('Thông tin lấy được :',result)
+    print('\n')
+    return result
+
+
+# In[3]:
+
+
+"""s = HTMLSession()
+r = s.get(productlink)
+main_info = config['main_info']
+product_name_name='product_name'
+product_name_config = get_tag_config_test(product_name_name,main_info)
+product_name= get_tag_info_test(r,product_name_name,product_name_config)[0]"""
+
+
+# In[4]:
+
+
 def get_product_info_test(productlink,config):
+    
     # Use HTMLSession
     try:
         s = HTMLSession()
         r = s.get(productlink)
     except:
-        print('Link nhập vào bị sai.')
-        exit()
-    print('Các thẻ đã chọn :\n')
-    # Sub-info
-    discounted_price=''
-    review=''
-    size=''
-    color=''
-    description_1=''
-    description_2=''
-    rating=''
-
-    # Main-info from here
+        print('Không tìm được trang web từ link này : ',productlink)
+        pass
     
     # Primary shop info
+    print('-------------------------------------------------')
+    print('THÔNG TIN CƠ BẢN : \n')
     shop_name = config['shop_name']
+    print('Tên shop : ',shop_name)
     stylebox_shop_id = config['stylebox_shop_id']
+    print('Stylebox_shop_id : ',stylebox_shop_id)
     shop_url = config['shop_url']
+    print('Link trang chủ của shop : ',shop_url)
     product_url= productlink
+    print('Link sản phẩm : ',product_url)
     scrape_date = datetime.now()
-    main_info = config['main_info']
-    sub_info = config['sub_info']
+    print('Ngày lấy thông tin sản phẩm : ',scrape_date)
     
+    main_info = config['main_info']
+    print('-------------------------------------------------')
+    print('THÔNG TIN CHÍNH : \n')
     # Get name
     try:
-        name = main_info['product_name']
-        name_selected_tag = name['selected_tag']
-        product_name_tag= r.html.find(name_selected_tag)[0]
-        print('product_name : ',product_name_tag)
-        product_name = product_name_tag.text.strip()
+        product_name_name='product_name'
+        product_name_config = get_tag_config_test(product_name_name,main_info)
+        product_name= get_tag_info_test(r,product_name_name,product_name_config)[0]
     except:
-        print('selected_tag trong phần product_name bị sai .')
         product_name=''
         pass
     
     # Get original price
-    print('\n')
     try:
-        price = main_info['original_price']
-        price_selected_tag = price['selected_tag']
-        price_value = price['value']
-        original_price_list = r.html.find(price_selected_tag)
-        original_price_tag= original_price_list[price_value]
-        print('original_price : ',original_price_tag)
-        original_price= original_price_tag.text.strip()
+        original_price_name='original_price'
+        original_price_config = get_tag_config_test(original_price_name,main_info)
+        original_price= get_tag_info_test(r,original_price_name,original_price_config)[0]
     except:
-        print('selected_tag hoặc value trong phần original_price bị sai .')
         original_price=''
     
     
     # Get product img links
-    print('\n')
     try:
-        img = main_info['imgs']
-        img_selected_tag = img['selected_tag']
-        img_attrs = img['attrs']
-        img_tags = r.html.find(img_selected_tag)
-        print('img_tags : ',img_tags[0])
-        link = []
-        for i in img_tags:
-            link.append(i.attrs[img_attrs])
-
-        links = set(link)
-        imgs = list(links)
+        imgs_name='imgs'
+        imgs_config = get_tag_config_test(imgs_name,main_info)
+        imgs= get_tag_info_test(r,imgs_name,imgs_config)
     except:
-        print('selected_tag trong phần imgs bị sai .')
         imgs =''
     
     
     # Sub info from here ----------------------------------------------------------------------------
-    
+    print('-------------------------------------------------')
+    print('THÔNG TIN PHỤ : \n')
+    sub_info = config['sub_info']
     # Get review
     try:
-        review= 4/0
+        review_name='review'
+        review_config = get_tag_config_test(review_name,sub_info)
+        review= get_tag_info_test(r,review_name,review_config)
     except:
         review=''
         pass
     
         
     # Get sale price
-    print('\n')
     try:
-        sale = sub_info['discounted_price']
-        sale_selected_tag = sale['selected_tag']
-        sale_value = sale['value']
-        discounted_price_list = r.html.find(sale_selected_tag)
-        discounted_price_tag = discounted_price_list[sale_value]
-        print('discounted_price : ',discounted_price_tag[0])
-        discounted_price = discounted_price_tag.text.strip()
+        discounted_price_name='discounted_price'
+        discounted_price_config = get_tag_config_test(discounted_price_name,sub_info)
+        discounted_price= get_tag_info_test(r,discounted_price_name,discounted_price_config)[0]
     except:
         discounted_price =''
-        print('selected_tag hoặc value trong phần discounted_price chưa có hoặc bị sai .')
         pass
     
     # Get color
-    print('\n')
     try:
-        colors = sub_info['color']
-        color_selected_tag = colors['selected_tag']
-        color_value = colors['value']
-        color_get_text = colors['get_text']
-        color_attrs = colors['attrs']
-        colorlist = r.html.find(color_selected_tag)
-        print('color_list : ', colorlist[0])
-        color=[]
-        for i in colorlist:
-            if color_get_text ==1:
-                color.append(i.text)
-            else:
-                color.append(i.attrs[color_attrs])    
+        color_name='color'
+        color_config = get_tag_config_test(color_name,sub_info)
+        color= get_tag_info_test(r,color_name,color_config)
     except:
-        print('selected_tag trong phần color chưa có hoặc bị sai .')
         color=''
         pass
     
-    
     # Get description_1
-    print('\n')
     try:
-        des1 = sub_info['description_1']
-        des1_selected_tag = des1['selected_tag']
-        des1_get_text = des1['get_text']
-        des1_attrs = des1['attrs']
-        description_1= []
-        content = r.html.find(des1_selected_tag)
-        print('description_1 : ',content[0])
-        for i in content:
-            if des1_get_text ==1:
-                description_1.append(i.text)
-            else:
-                description_1.append(i.attrs[des1_attrs])
-            #print(description_1)
+        description_1_name='description_1'
+        description_1_config = get_tag_config_test(description_1_name,sub_info)
+        description_1= get_tag_info_test(r,description_1_name,description_1_config)  
     except:
-        print('selected_tag trong phần description_1 chưa có hoặc bị sai .')
         description_1=''
         pass
     
     # Get description_2
-    print('\n')
     try:
-        des2 = sub_info['description_2']
-        des2_selected_tag = des2['selected_tag']
-        des2_get_text = des2['get_text']
-        des2_attrs = des2['attrs']
-        description_2= []
-        content = r.html.find(des2_selected_tag)
-        print('description_2 : ',content[0])
-        for i in content:
-            if des2_get_text ==1:
-                description_2.append(i.text)
-            else:
-                description_2.append(i.attrs[des2_attrs])
-            #print(description_1)
+        description_2_name='description_2'
+        description_2_config = get_tag_config_test(description_2_name,sub_info)
+        description_2= get_tag_info_test(r,description_2_name,description_2_config)  
     except:
-        print('selected_tag trong phần description_2 chưa có hoặc bị sai .')
         description_2=''
         pass
    
     
      # Get rating 
     try:
-        rating= 4/0
+        rating_name='rating'
+        rating_config = get_tag_config_test(rating_name,sub_info)
+        rating= get_tag_info_test(r,rating_name,rating_config)
     
     except:
         rating =''
       
     
     # Get size
-    print('\n')
     try:
-        sizes = sub_info['size']
-        sizes_selected_tag = sizes['selected_tag']
-        sizes_get_text = sizes['get_text']
-        sizes_attrs = sizes['attrs']
-        sizes_value = sizes['value']
-        si = r.html.find(sizes_selected_tag) 
-        print('size : ', si[0])
-        size = []
-        for i in si:
-            try:
-                size.append(i.attrs[sizes_attrs])
-            except:
-                pass
-        k = set(size)
-        size = list(k)
-        #print(size)
+        size_name='size'
+        size_config = get_tag_config_test(size_name,sub_info)
+        size= get_tag_info_test(r,size_name,size_config) 
     
     except:
-        print('selected_tag trong phần size chưa có hoặc bị sai .')
         size= ''
         pass
       
     # List product data forlow data schema
-    product_data=[shop_name, stylebox_shop_id, shop_url, product_url, product_name, original_price, imgs, scrape_date, discounted_price, review, size, color, description_1, description_2, rating]   
-    
-    print('------------------------------------------------------')
-    print('Dữ liệu lấy được : \n ')
-    name = ['shop_name', 'stylebox_shop_id', 'shop_url', 'product_url', 'product_name', 'original_price', 'imgs', 'scrape_date', 'discounted_price', 'review', 'size', 'color', 'description_1', 'description_2', 'rating']
-    # Sub info từ phẩn tử thứ 8 -> discounted_price.
-    print('Thông tin chính : ')
-    for i in range(len(name)):
-        if i==7:
-            print('\n')
-            print('Thông tin phụ : ')
-        tittle= name[i]
-        result= product_data[i]
-        print(tittle ,' : ',result)
+    product_data=[shop_name, stylebox_shop_id, shop_url, product_url, product_name, original_price, imgs, scrape_date, discounted_price, review, size, color, description_1, description_2, rating] 
     return product_data
 
-# %%
+
+# In[5]:
+
+
 __location__ = os.path.abspath('..')
 print(__location__)
 configs_path = os.path.join(__location__, 'Config')
+print(os.listdir(configs_path))
 
 for filename in os.listdir(configs_path):
+    print(filename)
     with open(os.path.join(configs_path, filename), encoding='utf-8') as cf:
         try:
             config = json.load(cf)
@@ -250,7 +244,11 @@ for filename in os.listdir(configs_path):
 print('Nhập vào link một sản phẩm để kiểm tra.')
 productlink = str(input())
 
-# %%
-test_result = get_product_info_test(productlink,config)
 
+# In[ ]:
+
+# In[6]:
+
+
+test_result = get_product_info_test(productlink,config)
 
