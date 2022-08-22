@@ -345,8 +345,6 @@ def web_scraping(config,productlinks, path_file):
         print("Tên file xuất ra bị sai, chương trình sẽ tự động suất ra kết quả là file result.csv và result.json.")
         csvfilename = os.path.join(path_file,"result.csv")
         jsonfilename = os.path.join(path_file,"result.json")
-    print('------------------')
-    print(data)
     export_csv_and_json(csvfilename, jsonfilename, data)
     print('Oki we done :))')
     return ''
