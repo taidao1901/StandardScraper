@@ -24,6 +24,15 @@ import urllib3
 
 # In[2]:
 
+def remove_after_test(string, remove_char):
+    kq=''
+    for i in string:
+        if i!= remove_char:
+            kq+=i
+        else:
+            break
+            return kq
+    return kq
 
 def get_tag_config_test(name,config):
     tag = config[name]
@@ -75,6 +84,11 @@ def get_tag_info_test(r,name,tag_config):
         pass
     unique_info = set(info)
     result = list(unique_info)
+
+    for i in range(len(result)):
+        if len(result[i])>888:
+            result[i] = remove_after_test(result[i],'\n')
+
     print('Thông tin lấy được :',result)
     print('\n')
     return result
@@ -95,11 +109,14 @@ product_name= get_tag_info_test(r,product_name_name,product_name_config)[0]"""
 
 
 def get_product_info_test(productlink,config):
+    headers = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36',
+}
     
     # Use HTMLSession
     try:
         s = HTMLSession()
-        r = s.get(productlink)
+        r = s.get(productlink,headers=headers)
     except:
         print('Không tìm được trang web từ link này : ',productlink)
         pass
@@ -228,9 +245,7 @@ def get_product_info_test(productlink,config):
 
 
 __location__ = os.path.abspath('..')
-print(__location__)
 configs_path = os.path.join(__location__, 'Config')
-print(os.listdir(configs_path))
 
 for filename in os.listdir(configs_path):
     print(filename)
@@ -251,4 +266,3 @@ productlink = str(input())
 
 
 test_result = get_product_info_test(productlink,config)
-

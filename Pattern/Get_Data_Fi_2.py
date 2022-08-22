@@ -76,6 +76,17 @@ def get_tag_config(name,config):
     tag = config[name]
     tag_config = [tag['selected_tag'],tag['value'],tag['get_text'],tag['attrs']]
     return tag_config
+
+def remove_after(string, remove_char):
+    kq=''
+    for i in string:
+        if i!= remove_char:
+            kq+=i
+        else:
+            break
+            return kq
+    return kq
+
 def get_tag_info(r,tag_config):
     selected_tag = tag_config[0]
     value = tag_config[1]
@@ -109,6 +120,11 @@ def get_tag_info(r,tag_config):
         pass
     unique_info = set(info)
     result = list(unique_info)
+    
+       
+    for i in range(len(result)):
+        if len(result[i])>888:
+            result[i] = remove_after(result[i],'\n')
     return result
 
 # Get value of price
@@ -141,6 +157,7 @@ def check_price(original_price,discounted_price):
         kq=[original_price,discounted_price]
         pass
     return kq
+        
         
 # this function use to get one product info.  
 def get_product_info(productlink,config):
@@ -328,6 +345,8 @@ def web_scraping(config,productlinks, path_file):
         print("Tên file xuất ra bị sai, chương trình sẽ tự động suất ra kết quả là file result.csv và result.json.")
         csvfilename = os.path.join(path_file,"result.csv")
         jsonfilename = os.path.join(path_file,"result.json")
+    print('------------------')
+    print(data)
     export_csv_and_json(csvfilename, jsonfilename, data)
     print('Oki we done :))')
     return ''
