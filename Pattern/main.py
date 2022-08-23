@@ -54,7 +54,7 @@ if __name__ == '__main__':
             else:
                 if os.path.exists(os.path.join(result_path, result_folder_name))==False:
                     os.mkdir(os.path.join(result_path, result_folder_name))
-                data = web_scraping(config, product_links[0:8], os.path.join(result_path, result_folder_name))
+                data = web_scraping(config, product_links, os.path.join(result_path, result_folder_name))
             #print('Thời gian lấy link sản phẩm: ', time.time()-start)
             exit()
         except Exception:
