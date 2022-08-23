@@ -15,7 +15,6 @@ import urllib3
 
 if __name__ == '__main__':
     __location__ = os.path.abspath('..')
-    print(__location__)
     configs_path = os.path.join(__location__, 'Config')
     result_path = os.path.join(__location__, 'Results')
     urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
@@ -55,7 +54,7 @@ if __name__ == '__main__':
             else:
                 if os.path.exists(os.path.join(result_path, result_folder_name))==False:
                     os.mkdir(os.path.join(result_path, result_folder_name))
-                data = web_scraping(config, product_links, os.path.join(result_path, result_folder_name))
+                data = web_scraping(config, product_links[0:8], os.path.join(result_path, result_folder_name))
             #print('Thời gian lấy link sản phẩm: ', time.time()-start)
             exit()
         except Exception:

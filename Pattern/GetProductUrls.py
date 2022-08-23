@@ -120,7 +120,8 @@ def Normal_Website(links, rootlink='', parent_atag_tag='',parent_atag_class='', 
             # get content in each page number per link
             content=''
             if isdynamic == False:
-                content = requests.get(link.format(number=num),verify =False).content
+                user_agent = {'User-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36'}
+                content = requests.get(link.format(number=num),headers = user_agent,verify =False).content
             else: 
                 content = dynamic_web(link.format(number=num))
 
