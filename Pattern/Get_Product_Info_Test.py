@@ -116,7 +116,7 @@ def get_product_info_test(productlink,config):
     # Use HTMLSession
     try:
         s = HTMLSession()
-        r = s.get(productlink,headers=headers)
+        r = s.get(productlink,headers=headers, verify =False)
     except:
         print('Không tìm được trang web từ link này : ',productlink)
         pass
