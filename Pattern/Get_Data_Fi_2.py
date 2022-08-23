@@ -164,7 +164,7 @@ def get_product_info(productlink,config):
 
     # Use HTMLSession
     s = HTMLSession()
-    r = s.get(productlink)
+    r = s.get(productlink, verify=False)
     
     # Sub-info
     discounted_price=''
