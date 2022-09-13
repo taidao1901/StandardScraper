@@ -24,7 +24,9 @@ def dynamic_web(link,parent_btn_class='',btn_class=''):
         driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
         driver.get(link)
         last_height = driver.execute_script("return document.body.scrollHeight")
+        cou=0
         while True:
+            cou+=1
             # Scroll down to bottom
             for  i in  (2500,1000):  
                 driver.execute_script("window.scrollTo(0,document.body.scrollHeight - arguments[0]);",i)
@@ -46,12 +48,15 @@ def dynamic_web(link,parent_btn_class='',btn_class=''):
                 pass
 
             # Wait to load page
-            sleep(3)
+            sleep(1)
             # Calculate new scroll height and compare with last scroll height
             new_height = driver.execute_script("return document.body.scrollHeight")
             if new_height == last_height:
                 break
             last_height = new_height
+            
+            if cou>50:
+                break
         
         # Convert to html type
 
