@@ -1,0 +1,4 @@
+Lỗi định dạng file config D:\Hien\My_workspace\Workspace\StandardScraper-master\Config\config copy 6.json. Copy lại file mẫu rồi sửa lại.
+
+File D:\Hien\My_workspace\Workspace\StandardScraper-master\Results\x. SHOP_ID_95_2022-11-08.json Không có dữ liệu. 
+
